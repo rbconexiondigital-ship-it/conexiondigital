@@ -179,7 +179,7 @@ export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(4);
 
-   useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
         setSlidesToShow(1);
@@ -199,7 +199,7 @@ export default function HomePage() {
 
   const nextSlide = () => {
     setCurrentSlide((prev) => 
-      prev + slidesToShow >= PARTNERS.length ? 0 : prev + 1
+      prev + 1 >= PARTNERS.length - slidesToShow + 1 ? 0 : prev + 1
     );
   };
 
@@ -208,8 +208,6 @@ export default function HomePage() {
       prev === 0 ? Math.max(0, PARTNERS.length - slidesToShow) : prev - 1
     );
   };
-
-  const visiblePartners = PARTNERS.slice(currentSlide, currentSlide + slidesToShow);
 
   const buscarEspecialista = () => {
     if (!rubro || !zona) return;
@@ -325,7 +323,7 @@ export default function HomePage() {
 
             {/* Debug Button - Right */}
             <div className="flex-shrink-0">
-              {/* <button
+              <button
                 onClick={() => {
                   setShowDebug(!showDebug);
                   setAssignmentCountsState(getAssignmentCounts());
@@ -333,7 +331,7 @@ export default function HomePage() {
                 className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1 rounded transition-colors hidden md:block"
               >
                 [Debug]
-              </button> */}
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -360,7 +358,7 @@ export default function HomePage() {
                     {link.label}
                   </a>
                 ))}
-                {/* <button
+                <button
                   onClick={() => {
                     setShowDebug(!showDebug);
                     setAssignmentCountsState(getAssignmentCounts());
@@ -369,7 +367,7 @@ export default function HomePage() {
                   className="px-4 py-3 text-sm text-gray-400 hover:text-gray-600 text-left"
                 >
                   [Debug Mode]
-                </button> */}
+                </button>
               </div>
             </nav>
           )}
@@ -407,107 +405,107 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
- {/* Hero Section */}
-<section id="inicio" className="relative py-16 sm:py-20 lg:py-28 px-4 overflow-hidden">
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <div className="absolute top-10 right-0 sm:right-10 w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 opacity-10">
-      <svg viewBox="0 0 200 200" className="w-full h-full">
-        <path
-          d="M150 30 Q180 60, 140 100 Q100 140, 50 130"
-          fill="none"
-          stroke="#84cc16"
-          strokeWidth="20"
-          strokeLinecap="round"
-        />
-      </svg>
-    </div>
-    <div className="absolute bottom-0 left-0 w-32 sm:w-48 h-32 sm:h-48 opacity-5">
-      <svg viewBox="0 0 200 200" className="w-full h-full">
-        <path
-          d="M50 170 Q20 140, 60 100 Q100 60, 150 70"
-          fill="none"
-          stroke="#84cc16"
-          strokeWidth="20"
-          strokeLinecap="round"
-        />
-      </svg>
-    </div>
-  </div>
-  
-  <div className="max-w-7xl mx-auto relative z-10">
-    <div className="flex flex-col items-center justify-center text-center gap-8 lg:gap-12">
-      {/* Logo */}
-      <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex-shrink-0 bg-white shadow-2xl flex items-center justify-center p-3 border-4 border-gray-100">
-        <img 
-          src="service_home.jpg"
-          alt="Conexion Digital Logo"
-          className="w-full h-full object-contain rounded-full"
-        />
-      </div>
-      
-      {/* Content */}
-      <div className="text-center flex-1">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-800 text-balance">
-          Conectamos expertos con quienes los necesitan
-        </h2>
-        <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto text-pretty">
-          Somos una cooperativa de servicios tecnicos que garantiza calidad, precios justos y atencion rapida en toda la ciudad.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-          <a
-            href="#buscar"
-            className="inline-flex items-center justify-center gap-2 bg-lime-500 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-lime-400 transition-all shadow-lg shadow-lime-500/30 text-base sm:text-lg"
-          >
-            <Search className="w-5 h-5" />
-            Buscar especialista
-          </a>
-          <a
-            href="#nosotros"
-            className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all border border-gray-200 text-base sm:text-lg"
-          >
-            Conocer mas
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-        {/* Services Section */}
-<section id="servicios" className="py-16 sm:py-20 px-4 bg-white">
-  <div className="max-w-7xl mx-auto">
-    <div className="text-center mb-10 sm:mb-14">
-      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
-        Nuestros Servicios
-      </h3>
-      <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-        Ofrecemos una amplia variedad de servicios tecnicos para el hogar y empresas, 
-        con profesionales certificados y garantia de calidad.
-      </p>
-    </div>
-    
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-      {RUBROS.map((r) => {
-        const IconComponent = r.icon;
-        return (
-          <div 
-            key={r.value} 
-            className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-lime-50 hover:to-lime-100 p-6 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-lime-300 transition-all cursor-pointer flex flex-col items-center text-center"
-          >
-            <div className="w-16 h-16 bg-transparent rounded-xl flex items-center justify-center mb-4 shadow-sm group-hover:shadow-md transition-shadow">        <IconComponent 
-                className="w-12 h-12 text-lime-600" 
-                strokeWidth={1.5} 
-                fill="none"
-                stroke="currentColor"
-                style={{ background: 'transparent' }}
-              />
+        <section id="inicio" className="relative py-16 sm:py-20 lg:py-28 px-4 overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-10 right-0 sm:right-10 w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 opacity-10">
+              <svg viewBox="0 0 200 200" className="w-full h-full">
+                <path
+                  d="M150 30 Q180 60, 140 100 Q100 140, 50 130"
+                  fill="none"
+                  stroke="#84cc16"
+                  strokeWidth="20"
+                  strokeLinecap="round"
+                />
+              </svg>
             </div>
-            <h4 className="font-semibold text-gray-700 text-base sm:text-lg leading-tight">{r.label}</h4>
+            <div className="absolute bottom-0 left-0 w-32 sm:w-48 h-32 sm:h-48 opacity-5">
+              <svg viewBox="0 0 200 200" className="w-full h-full">
+                <path
+                  d="M50 170 Q20 140, 60 100 Q100 60, 150 70"
+                  fill="none"
+                  stroke="#84cc16"
+                  strokeWidth="20"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
           </div>
-        );
-      })}
-    </div>
-  </div>
-</section>
+          
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="flex flex-col items-center justify-center text-center gap-8 lg:gap-12">
+              {/* Logo */}
+              <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex-shrink-0 bg-white shadow-2xl flex items-center justify-center p-3 border-4 border-gray-100 rounded-full">
+                <img 
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot_20260527-180356_Instagram-kpjUGpMUKxQXJXBih01VTqrZF1LmMg.jpg"
+                  alt="Conexion Digital Logo"
+                  className="w-full h-full object-contain rounded-full"
+                />
+              </div>
+              
+              {/* Content */}
+              <div className="text-center flex-1">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-800 text-balance">
+                  Conectamos expertos con quienes los necesitan
+                </h2>
+                <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto text-pretty">
+                  Somos una cooperativa de servicios tecnicos que garantiza calidad, precios justos y atencion rapida en toda la ciudad.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                  <a
+                    href="#buscar"
+                    className="inline-flex items-center justify-center gap-2 bg-lime-500 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-lime-400 transition-all shadow-lg shadow-lime-500/30 text-base sm:text-lg"
+                  >
+                    <Search className="w-5 h-5" />
+                    Buscar especialista
+                  </a>
+                  <a
+                    href="#nosotros"
+                    className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all border border-gray-200 text-base sm:text-lg"
+                  >
+                    Conocer mas
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section id="servicios" className="py-16 sm:py-20 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-10 sm:mb-14">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
+                Nuestros Servicios
+              </h3>
+              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+                Ofrecemos una amplia variedad de servicios tecnicos para el hogar y empresas, 
+                con profesionales certificados y garantia de calidad.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {RUBROS.map((r) => {
+                const IconComponent = r.icon;
+                return (
+                  <div 
+                    key={r.value} 
+                    className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-lime-50 hover:to-lime-100 p-6 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-lime-300 transition-all cursor-pointer flex flex-col items-center text-center"
+                  >
+                    <div className="w-20 h-20 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm group-hover:shadow-md transition-shadow">
+                      <IconComponent 
+                        className="w-12 h-12 text-lime-600" 
+                        strokeWidth={1.5} 
+                        fill="none"
+                        stroke="currentColor"
+                      />
+                    </div>
+                    <h4 className="font-semibold text-gray-700 text-base sm:text-lg leading-tight">{r.label}</h4>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
 
         {/* Search Section */}
         <section id="buscar" className="py-16 sm:py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
@@ -655,6 +653,84 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Partners Carousel Section */}
+        <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-white to-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-10 sm:mb-14">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
+                Nuestros Partners
+              </h3>
+              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+                Empresas y organizaciones que confían en nosotros
+              </p>
+            </div>
+
+            <div className="relative px-12">
+              {/* Navigation Buttons */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg border border-gray-200 hover:bg-lime-50 hover:border-lime-300 transition-all z-10"
+                aria-label="Previous partners"
+              >
+                <ChevronLeft className="w-6 h-6 text-gray-600 hover:text-lime-600" />
+              </button>
+              
+              <button
+                onClick={nextSlide}
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg border border-gray-200 hover:bg-lime-50 hover:border-lime-300 transition-all z-10"
+                aria-label="Next partners"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-600 hover:text-lime-600" />
+              </button>
+
+              {/* Carousel Container */}
+              <div className="overflow-hidden">
+                <div 
+                  className="flex gap-6 transition-transform duration-300 ease-in-out"
+                  style={{ transform: `translateX(-${currentSlide * (100 / slidesToShow)}%)` }}
+                >
+                  {PARTNERS.map((partner) => (
+                    <div
+                      key={partner.id}
+                      className="flex-shrink-0"
+                      style={{ width: `calc(${100 / slidesToShow}% - ${(slidesToShow - 1) * 24 / slidesToShow}px)` }}
+                    >
+                      <div className="bg-white rounded-xl sm:rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-lime-300 group">
+                        <div className="h-24 flex items-center justify-center">
+                          <img
+                            src={partner.logo}
+                            alt={partner.alt}
+                            className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                          />
+                        </div>
+                        <p className="text-center text-gray-600 text-sm mt-4 font-medium group-hover:text-lime-600 transition-colors">
+                          {partner.name}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Dots Indicator */}
+              <div className="flex justify-center gap-2 mt-8">
+                {Array.from({ length: Math.ceil(PARTNERS.length / slidesToShow) }).map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentSlide(idx * slidesToShow)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      Math.floor(currentSlide / slidesToShow) === idx
+                        ? "w-8 bg-lime-500"
+                        : "w-2 bg-gray-300 hover:bg-gray-400"
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* About Section */}
         <section id="nosotros" className="py-16 sm:py-20 px-4 bg-white">
           <div className="max-w-7xl mx-auto">
@@ -796,83 +872,9 @@ export default function HomePage() {
                   contacto@conexiondigital.coop
                 </a>
               </div>
-              
-              {/* <div className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow sm:col-span-2 lg:col-span-1">
-                <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="w-7 h-7 text-gray-600" />
-                </div>
-                <h4 className="font-semibold text-gray-800 mb-2 text-lg">Oficina</h4>
-                <p className="text-gray-600 text-sm mb-4">Atencion presencial</p>
-                <p className="text-gray-700 font-medium">
-                  Av. Corrientes 1234, CABA
-                </p>
-              </div> */}
             </div>
-
-            {/* Hours */}
-            {/* <div className="mt-8 sm:mt-12 bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100 max-w-2xl mx-auto">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Clock className="w-6 h-6 text-lime-600" />
-                <h4 className="font-semibold text-gray-800 text-lg">Horarios de atencion</h4>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4 text-center sm:text-left">
-                <div>
-                  <p className="text-gray-600 text-sm">Lunes a Viernes</p>
-                  <p className="text-gray-800 font-medium">8:00 - 20:00 hs</p>
-                </div>
-                <div>
-                  <p className="text-gray-600 text-sm">Sabados</p>
-                  <p className="text-gray-800 font-medium">9:00 - 14:00 hs</p>
-                </div>
-              </div>
-              <p className="text-center text-lime-600 font-medium mt-4 text-sm">
-                Emergencias 24/7 via WhatsApp
-              </p>
-            </div> */}
           </div>
         </section>
-        {/* Partners Carousel Section */}
-      <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-10 sm:mb-14">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
-              Nuestros Partners
-            </h3>
-            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-              Empresas y organizaciones que confían en nosotros
-            </p>
-          </div>
-
-          <div className="relative px-12">
-            {/* Carousel Container */}
-            <div className="overflow-hidden">
-              <div 
-                className="flex gap-6 transition-transform duration-300 ease-in-out"
-                style={{ transform: `translateX(-${currentSlide * (100 / slidesToShow)}%)` }}
-              >
-                {PARTNERS.map((partner) => (
-                  <div
-                    key={partner.id}
-                    className="flex-shrink-0"
-                    style={{ width: `${100 / slidesToShow}%` }}
-                  >
-                    <div className="bg-white rounded-xl sm:rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-lime-300 group">
-                      <div className="h-24 flex items-center justify-center">
-                        <img
-                          src={partner.logo}
-                          alt={partner.alt}
-                          className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                        />
-                      </div>
-                      <p className="text-center text-gray-600 text-sm mt-4 font-medium group-hover:text-lime-600 transition-colors">
-                        {partner.name}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
       </main>
 
       {/* Footer */}
