@@ -853,15 +853,7 @@ export default function HomePage() {
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-2 mb-4">
                 <div className="relative w-10 h-10">
-                  <svg viewBox="0 0 100 100" className="w-full h-full">
-                    <path
-                      d="M75 20 Q90 35, 70 55 Q50 75, 25 70"
-                      fill="none"
-                      stroke="#84cc16"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+                  <img src="logoconexiondigital.png"/>
                 </div>
                 <div>
                   <span className="text-lg font-bold">
