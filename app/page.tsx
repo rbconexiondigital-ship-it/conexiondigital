@@ -21,7 +21,8 @@ import {
   Star,
   Building,
   Target,
-  Heart
+  Heart,
+  CodeXml
 } from "lucide-react";
 
 // Types
@@ -42,6 +43,7 @@ const RUBROS = [
   { value: "aires", label: "Aires acondicionados", icon: Wind },
   { value: "herreria", label: "Herreria", icon: Shield },
   { value: "cerrajeria", label: "Cerrajeria", icon: Wrench },
+  { value: "software", label: "Software", icon: CodeXml },
 ];
 
 const ZONAS = [
