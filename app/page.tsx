@@ -279,7 +279,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo - Left */}
-            <a href="#inicio" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <a href="#" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
               <div className="relative w-10 h-10 sm:w-12 sm:h-12">
                 {/* <svg viewBox="0 0 100 100" className="w-full h-full">
                   <path
@@ -297,16 +297,11 @@ export default function HomePage() {
                     strokeLinecap="round"
                   />
                 </svg> */}
-
-              </div>
-              <div>
-                <a href="#">
-                  <img 
-                    src="logoconexiondigital.png"
-                    alt="Conexion Digital Logo"
-                    className="w-full h-full object-contain rounded-full"
-                  />
-                </a>
+                <img 
+                  src="logoconexiondigital.png"
+                  alt="Conexion Digital Logo"
+                  className="w-full h-full object-contain rounded-full"
+                />
               </div>
             </a>
 
