@@ -276,14 +276,13 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 via-gray-50 to-white">
       {/* Fixed Navbar */}
 {/* Fixed Navbar */}
-{/* Fixed Navbar */}
 <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50 shadow-sm">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex items-center justify-between h-16 md:h-20">
-      {/* Left section - Logo */}
-      <div className="flex items-center">
+    <div className="flex items-center h-16 md:h-20">
+      {/* Logo - Left */}
+      <div className="flex items-center md:w-1/3">
         <a href="#" className="flex items-center flex-shrink-0">
-          <div className="relative w-32 sm:w-40 md:w-48">
+          <div className="relative w-32 sm:w-40">
             <img 
               src="logoconexiondigitalhorizontal.png"
               alt="Conexion Digital Logo"
@@ -293,8 +292,8 @@ export default function HomePage() {
         </a>
       </div>
 
-      {/* Desktop Navigation - Centered */}
-      <nav className="hidden md:flex items-center justify-center gap-1 lg:gap-2">
+      {/* Desktop Navigation - Centered (only visible on desktop) */}
+      <nav className="hidden md:flex items-center justify-center gap-1 lg:gap-2 md:w-1/3">
         {NAV_LINKS.map((link) => (
           <a
             key={link.href}
@@ -306,9 +305,8 @@ export default function HomePage() {
         ))}
       </nav>
 
-      {/* Right section - Mobile Menu Button */}
-      <div className="flex items-center">
-        {/* Mobile Menu Button */}
+      {/* Right section - Mobile Menu Button (visible only on mobile) */}
+      <div className="flex items-center justify-end md:w-1/3">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="md:hidden p-2 text-gray-600 hover:text-lime-600 hover:bg-gray-100 rounded-lg transition-colors"
