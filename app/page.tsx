@@ -716,7 +716,7 @@ export default function HomePage() {
             </div>
 
             {/* Hours */}
-            <div className="mt-8 sm:mt-12 bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100 max-w-2xl mx-auto">
+            {/* <div className="mt-8 sm:mt-12 bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100 max-w-2xl mx-auto">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Clock className="w-6 h-6 text-lime-600" />
                 <h4 className="font-semibold text-gray-800 text-lg">Horarios de atencion</h4>
@@ -734,7 +734,7 @@ export default function HomePage() {
               <p className="text-center text-lime-600 font-medium mt-4 text-sm">
                 Emergencias 24/7 via WhatsApp
               </p>
-            </div>
+            </div> */}
           </div>
         </section>
       </main>
