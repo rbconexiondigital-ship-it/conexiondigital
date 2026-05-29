@@ -322,7 +322,7 @@ export default function HomePage() {
             </nav>
 
             {/* Debug Button - Right */}
-            <div className="flex-shrink-0">
+            {/* <div className="flex-shrink-0">
               <button
                 onClick={() => {
                   setShowDebug(!showDebug);
@@ -332,7 +332,7 @@ export default function HomePage() {
               >
                 [Debug]
               </button>
-            </div>
+            </div> */}
 
             {/* Mobile Menu Button */}
             <button
@@ -653,84 +653,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Partners Carousel Section */}
-        <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-white to-gray-50">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-10 sm:mb-14">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
-                Nuestros Partners
-              </h3>
-              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-                Empresas y organizaciones que confían en nosotros
-              </p>
-            </div>
-
-            <div className="relative px-12">
-              {/* Navigation Buttons */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg border border-gray-200 hover:bg-lime-50 hover:border-lime-300 transition-all z-10"
-                aria-label="Previous partners"
-              >
-                <ChevronLeft className="w-6 h-6 text-gray-600 hover:text-lime-600" />
-              </button>
-              
-              <button
-                onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg border border-gray-200 hover:bg-lime-50 hover:border-lime-300 transition-all z-10"
-                aria-label="Next partners"
-              >
-                <ChevronRight className="w-6 h-6 text-gray-600 hover:text-lime-600" />
-              </button>
-
-              {/* Carousel Container */}
-              <div className="overflow-hidden">
-                <div 
-                  className="flex gap-6 transition-transform duration-300 ease-in-out"
-                  style={{ transform: `translateX(-${currentSlide * (100 / slidesToShow)}%)` }}
-                >
-                  {PARTNERS.map((partner) => (
-                    <div
-                      key={partner.id}
-                      className="flex-shrink-0"
-                      style={{ width: `calc(${100 / slidesToShow}% - ${(slidesToShow - 1) * 24 / slidesToShow}px)` }}
-                    >
-                      <div className="bg-white rounded-xl sm:rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-lime-300 group">
-                        <div className="h-24 flex items-center justify-center">
-                          <img
-                            src={partner.logo}
-                            alt={partner.alt}
-                            className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                          />
-                        </div>
-                        <p className="text-center text-gray-600 text-sm mt-4 font-medium group-hover:text-lime-600 transition-colors">
-                          {partner.name}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Dots Indicator */}
-              <div className="flex justify-center gap-2 mt-8">
-                {Array.from({ length: Math.ceil(PARTNERS.length / slidesToShow) }).map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentSlide(idx * slidesToShow)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      Math.floor(currentSlide / slidesToShow) === idx
-                        ? "w-8 bg-lime-500"
-                        : "w-2 bg-gray-300 hover:bg-gray-400"
-                    }`}
-                    aria-label={`Go to slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* About Section */}
         <section id="nosotros" className="py-16 sm:py-20 px-4 bg-white">
           <div className="max-w-7xl mx-auto">
@@ -871,6 +793,84 @@ export default function HomePage() {
                 >
                   contacto@conexiondigital.coop
                 </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Partners Carousel Section */}
+        <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-white to-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-10 sm:mb-14">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
+                Nuestros Partners
+              </h3>
+              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+                Empresas y organizaciones que confían en nosotros
+              </p>
+            </div>
+
+            <div className="relative px-12">
+              {/* Navigation Buttons */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg border border-gray-200 hover:bg-lime-50 hover:border-lime-300 transition-all z-10"
+                aria-label="Previous partners"
+              >
+                <ChevronLeft className="w-6 h-6 text-gray-600 hover:text-lime-600" />
+              </button>
+              
+              <button
+                onClick={nextSlide}
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg border border-gray-200 hover:bg-lime-50 hover:border-lime-300 transition-all z-10"
+                aria-label="Next partners"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-600 hover:text-lime-600" />
+              </button>
+
+              {/* Carousel Container */}
+              <div className="overflow-hidden">
+                <div 
+                  className="flex gap-6 transition-transform duration-300 ease-in-out"
+                  style={{ transform: `translateX(-${currentSlide * (100 / slidesToShow)}%)` }}
+                >
+                  {PARTNERS.map((partner) => (
+                    <div
+                      key={partner.id}
+                      className="flex-shrink-0"
+                      style={{ width: `calc(${100 / slidesToShow}% - ${(slidesToShow - 1) * 24 / slidesToShow}px)` }}
+                    >
+                      <div className="bg-white rounded-xl sm:rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-lime-300 group">
+                        <div className="h-24 flex items-center justify-center">
+                          <img
+                            src={partner.logo}
+                            alt={partner.alt}
+                            className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                          />
+                        </div>
+                        <p className="text-center text-gray-600 text-sm mt-4 font-medium group-hover:text-lime-600 transition-colors">
+                          {partner.name}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Dots Indicator */}
+              <div className="flex justify-center gap-2 mt-8">
+                {Array.from({ length: Math.ceil(PARTNERS.length / slidesToShow) }).map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentSlide(idx * slidesToShow)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      Math.floor(currentSlide / slidesToShow) === idx
+                        ? "w-8 bg-lime-500"
+                        : "w-2 bg-gray-300 hover:bg-gray-400"
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
