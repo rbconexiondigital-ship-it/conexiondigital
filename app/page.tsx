@@ -408,7 +408,7 @@ export default function HomePage() {
               {/* Logo */}
               <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex-shrink-0 bg-white shadow-2xl flex items-center justify-center p-3 border-4 border-gray-100 rounded-full">
                 <img 
-                  src="service_home.jpg"
+                  src="service_home.png"
                   alt="Conexion Digital Logo"
                   className="w-full h-full object-contain rounded-full"
                 />
