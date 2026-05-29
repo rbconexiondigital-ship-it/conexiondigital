@@ -281,22 +281,6 @@ export default function HomePage() {
             {/* Logo - Left */}
             <a href="#" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
               <div className="relative w-10 h-10 sm:w-12 sm:h-12">
-                {/* <svg viewBox="0 0 100 100" className="w-full h-full">
-                  <path
-                    d="M75 20 Q90 35, 70 55 Q50 75, 25 70"
-                    fill="none"
-                    stroke="#84cc16"
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M70 25 Q82 38, 65 52"
-                    fill="none"
-                    stroke="#9ca3af"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
-                </svg> */}
                 <img 
                   src="logoconexiondigital.png"
                   alt="Conexion Digital Logo"
