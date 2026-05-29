@@ -612,7 +612,7 @@ export default function HomePage() {
                 <p className="text-3xl sm:text-4xl font-bold text-lime-600 mb-1">+500</p>
                 <p className="text-gray-600 text-xs sm:text-sm">Servicios realizados</p>
               </div>
-              <div className="bg-gradient-to-br from-gray-50 to-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 text-center">
+              <div className="bg-gradient-to-br from-lime-50 to-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 text-center">
                 <p className="text-3xl sm:text-4xl font-bold text-gray-700 mb-1">+50</p>
                 <p className="text-gray-600 text-xs sm:text-sm">Especialistas activos</p>
               </div>
@@ -620,7 +620,7 @@ export default function HomePage() {
                 <p className="text-3xl sm:text-4xl font-bold text-lime-600 mb-1">5</p>
                 <p className="text-gray-600 text-xs sm:text-sm">Zonas de cobertura</p>
               </div>
-              <div className="bg-gradient-to-br from-gray-50 to-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 text-center">
+              <div className="bg-gradient-to-br from-lime-50 to-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 text-center">
                 <p className="text-3xl sm:text-4xl font-bold text-gray-700 mb-1">98%</p>
                 <p className="text-gray-600 text-xs sm:text-sm">Clientes satisfechos</p>
               </div>
