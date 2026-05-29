@@ -98,11 +98,11 @@ const ESPECIALISTAS: Especialista[] = [
 ];
 
 const NAV_LINKS = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#buscar", label: "Buscar" },
-  { href: "#nosotros", label: "Nosotros" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "#inicio", label: "INCIO" },
+  { href: "#servicios", label: "SERVICIOS" },
+  { href: "#buscar", label: "BUSCAR" },
+  { href: "#nosotros", label: "NOSOTROS" },
+  { href: "#contacto", label: "CONTACTO" },
 ];
 
 const PARTNERS = [
