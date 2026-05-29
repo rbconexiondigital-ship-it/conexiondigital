@@ -864,16 +864,12 @@ export default function HomePage() {
                   </svg>
                 </div>
                 <div>
-                  <img src="logoconexiondigital.png" 
-                     alt="Conexion Digital Logo"
-                    className="w-full h-auto object-contain"
-                  />
-                  {/* <span className="text-lg font-bold">
+                  <span className="text-lg font-bold">
                     <span className="text-gray-400">c</span>
                     <span className="text-lime-500 font-black">O</span>
                     <span className="text-gray-400">nexion</span>
                   </span>
-                  <span className="text-sm text-gray-500 italic ml-1">digital</span> */}
+                  <span className="text-sm text-gray-500 italic ml-1">digital</span>
                 </div>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed">
@@ -930,7 +926,7 @@ export default function HomePage() {
           {/* Bottom */}
           <div className="pt-8 border-t border-gray-800 text-center">
             <p className="text-gray-500 text-sm">
-              © 2026 Conexion Digital - Cooperativa de Servicios. Todos los derechos reservados.
+              © 2025 Conexion Digital - Cooperativa de Servicios. Todos los derechos reservados.
             </p>
           </div>
         </div>
