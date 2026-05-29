@@ -275,59 +275,47 @@ export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 via-gray-50 to-white">
       {/* Fixed Navbar */}
+{/* Fixed Navbar */}
       <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo - Left */}
-              {/* Logo - Left */}
-              <a href="#" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-                <div className="relative w-full h-12 mt-2 sm:w-full sm:h-16 md:w-full md:h-20">
+          <div className="flex items-center h-16 md:h-20">
+            {/* Left section - Logo (same width as right section) */}
+            <div className="w-1/3 flex justify-start">
+              <a href="#" className="flex items-center flex-shrink-0">
+                <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20">
                   <img 
                     src="logoconexiondigitalhorizontal.png"
                     alt="Conexion Digital Logo"
                     className="w-full h-full object-contain"
                   />
                 </div>
-                {/* Opcional: agregar texto del logo
-                <span className="hidden sm:inline-block font-bold text-gray-800 text-lg md:text-xl">
-                  <span className="text-lime-500">Conexion</span> Digital
-                </span> */}
               </a>
+            </div>
 
-            {/* Desktop Navigation - Centered */}
-            <nav className="hidden md:flex items-center justify-center gap-1 lg:gap-2 flex-1 mx-8">
+            {/* Center section - Navigation */}
+            <nav className="hidden md:flex items-center justify-center gap-1 lg:gap-2 w-1/3">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-3 lg:px-4 py-2 text-sm font-medium text-gray-600 hover:text-lime-600 hover:bg-lime-50 rounded-lg transition-colors"
+                  className="px-3 lg:px-4 py-2 text-sm font-medium text-gray-600 hover:text-lime-600 hover:bg-lime-50 rounded-lg transition-colors whitespace-nowrap"
                 >
                   {link.label}
                 </a>
               ))}
             </nav>
 
-            {/* Debug Button - Right */}
-            <div className="flex-shrink-0">
-              {/* <button
-                onClick={() => {
-                  setShowDebug(!showDebug);
-                  setAssignmentCountsState(getAssignmentCounts());
-                }}
-                className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1 rounded transition-colors hidden md:block"
+            {/* Right section - Empty spacer (same width as logo) */}
+            <div className="w-1/3 flex justify-end">
+              {/* Mobile Menu Button - visible only on mobile */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2 text-gray-600 hover:text-lime-600 hover:bg-gray-100 rounded-lg transition-colors"
+                aria-label="Menu"
               >
-                [Debug]
-              </button> */}
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
             </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-gray-600 hover:text-lime-600 hover:bg-gray-100 rounded-lg transition-colors"
-              aria-label="Menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
           </div>
 
           {/* Mobile Navigation */}
@@ -359,7 +347,7 @@ export default function HomePage() {
           )}
         </div>
       </header>
-
+    
       {/* Spacer for fixed header */}
       <div className="h-16 md:h-20" />
 
