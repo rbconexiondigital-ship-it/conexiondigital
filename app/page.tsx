@@ -298,19 +298,15 @@ export default function HomePage() {
                   />
                 </svg> */}
 
-                <img 
-                  src="logoconexiondigital.png"
-                  alt="Conexion Digital Logo"
-                  className="w-full h-full object-contain rounded-full"
-                />
               </div>
               <div>
-                <h1 className="text-lg sm:text-xl font-bold text-gray-700 tracking-tight">
-                  <span className="text-gray-600">c</span>
-                  <span className="text-lime-500 font-black">O</span>
-                  <span className="text-gray-600">nexion</span>
-                </h1>
-                <p className="text-[10px] sm:text-xs text-gray-500 italic -mt-0.5">digital</p>
+                <a href="#">
+                  <img 
+                    src="logoconexiondigital.png"
+                    alt="Conexion Digital Logo"
+                    className="w-full h-full object-contain rounded-full"
+                  />
+                </a>
               </div>
             </a>
 
