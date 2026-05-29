@@ -323,7 +323,7 @@ export default function HomePage() {
 
             {/* Debug Button - Right */}
             <div className="flex-shrink-0">
-              <button
+              {/* <button
                 onClick={() => {
                   setShowDebug(!showDebug);
                   setAssignmentCountsState(getAssignmentCounts());
@@ -331,7 +331,7 @@ export default function HomePage() {
                 className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1 rounded transition-colors hidden md:block"
               >
                 [Debug]
-              </button>
+              </button> */}
             </div>
 
             {/* Mobile Menu Button */}
