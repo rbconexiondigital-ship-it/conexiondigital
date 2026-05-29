@@ -323,7 +323,7 @@ export default function HomePage() {
 
             {/* Debug Button - Right */}
             <div className="flex-shrink-0">
-              {/* <button
+              <button
                 onClick={() => {
                   setShowDebug(!showDebug);
                   setAssignmentCountsState(getAssignmentCounts());
@@ -331,7 +331,7 @@ export default function HomePage() {
                 className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1 rounded transition-colors hidden md:block"
               >
                 [Debug]
-              </button> */}
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -876,6 +876,36 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/5491112345678"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 group"
+        aria-label="Contactar por WhatsApp"
+      >
+        <div className="relative">
+          {/* Pulsing animation ring */}
+          <div className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75"></div>
+          {/* Button background */}
+          <div className="relative bg-green-500 rounded-full p-4 shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110">
+            {/* WhatsApp Icon SVG */}
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24" 
+              fill="currentColor"
+              className="w-7 h-7 text-white"
+            >
+              <path d="M19.077 4.928C16.979 2.83 14.136 1.5 11.042 1.5c-6.095 0-11.034 4.94-11.043 11.023-.003 1.961.514 3.875 1.5 5.566L.5 22.5l4.441-1.166c1.625.888 3.468 1.354 5.344 1.354h.005c6.093 0 11.035-4.94 11.044-11.021.003-2.934-1.136-5.688-3.258-7.739zM11.042 20.77c-1.596.002-3.162-.43-4.542-1.252l-.328-.195-2.656.698.709-2.585-.212-.339c-.96-1.531-1.469-3.298-1.466-5.103.007-5.09 4.148-9.229 9.248-9.229 2.468.001 4.787.964 6.531 2.712 1.744 1.747 2.7 4.07 2.694 6.534-.007 5.09-4.147 9.234-9.248 9.234zm5.067-6.916c-.278-.139-1.642-.81-1.896-.902-.254-.093-.438-.139-.622.139-.184.278-.713.902-.874 1.087-.161.185-.323.208-.601.069-.278-.139-1.174-.433-2.235-1.38-.826-.736-1.383-1.644-1.545-1.922-.162-.278-.017-.428.122-.566.125-.124.278-.323.417-.485.139-.162.185-.278.278-.463.093-.185.046-.347-.023-.486-.069-.139-.622-1.5-.853-2.054-.224-.538-.453-.465-.622-.474-.161-.008-.346-.008-.53-.008-.185 0-.485.069-.739.347-.254.278-.97.947-.97 2.31 0 1.362.992 2.677 1.13 2.862.139.185 1.952 2.98 4.73 4.18.66.286 1.176.456 1.578.585.663.21 1.266.18 1.743.109.531-.079 1.642-.671 1.873-1.319.231-.648.231-1.203.162-1.319-.069-.116-.254-.185-.532-.324z"/>
+            </svg>
+          </div>
+          {/* Tooltip text */}
+          <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+            ¡Chatea con nosotros!
+          </span>
+        </div>
+      </a>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-10 sm:py-14 px-4">
