@@ -321,74 +321,71 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section id="inicio" className="relative py-16 sm:py-20 lg:py-28 px-4 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-10 right-0 sm:right-10 w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 opacity-10">
-              <svg viewBox="0 0 200 200" className="w-full h-full">
-                <path
-                  d="M150 30 Q180 60, 140 100 Q100 140, 50 130"
-                  fill="none"
-                  stroke="#84cc16"
-                  strokeWidth="20"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-            <div className="absolute bottom-0 left-0 w-32 sm:w-48 h-32 sm:h-48 opacity-5">
-              <svg viewBox="0 0 200 200" className="w-full h-full">
-                <path
-                  d="M50 170 Q20 140, 60 100 Q100 60, 150 70"
-                  fill="none"
-                  stroke="#84cc16"
-                  strokeWidth="20"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-          </div>
-          
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-              {/* Logo */}
-              <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex-shrink-0 bg-white rounded-full shadow-2xl flex items-center justify-center p-3 border-4 border-gray-100">
-                {/* <img 
-                  src="/service_home.jpg"
-                  alt="Conexion Digital Logo"
-                  className="w-full h-full object-contain rounded-full"
-                /> */}
-                <img src="service_home.jpg" alt="Conexion Digital Logo"
-                  className="w-full h-full object-contain rounded-full"
-                 />
-              </div>
-              
-              {/* Content */}
-              <div className="text-center lg:text-left flex-1">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-800 text-balance leading-tight">
-                  Conectamos expertos con quienes los necesitan
-                </h2>
-                <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 text-pretty">
-                  Somos una cooperativa de servicios tecnicos que garantiza calidad, precios justos y atencion rapida en toda la ciudad.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                  <a
-                    href="#buscar"
-                    className="inline-flex items-center justify-center gap-2 bg-lime-500 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-lime-400 transition-all shadow-lg shadow-lime-500/30 text-base sm:text-lg"
-                  >
-                    <Search className="w-5 h-5" />
-                    Buscar especialista
-                  </a>
-                  <a
-                    href="#nosotros"
-                    className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all border border-gray-200 text-base sm:text-lg"
-                  >
-                    Conocer mas
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
+ {/* Hero Section */}
+<section id="inicio" className="relative py-16 sm:py-20 lg:py-28 px-4 overflow-hidden">
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute top-10 right-0 sm:right-10 w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 opacity-10">
+      <svg viewBox="0 0 200 200" className="w-full h-full">
+        <path
+          d="M150 30 Q180 60, 140 100 Q100 140, 50 130"
+          fill="none"
+          stroke="#84cc16"
+          strokeWidth="20"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
+    <div className="absolute bottom-0 left-0 w-32 sm:w-48 h-32 sm:h-48 opacity-5">
+      <svg viewBox="0 0 200 200" className="w-full h-full">
+        <path
+          d="M50 170 Q20 140, 60 100 Q100 60, 150 70"
+          fill="none"
+          stroke="#84cc16"
+          strokeWidth="20"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
+  </div>
+  
+  <div className="max-w-7xl mx-auto relative z-10">
+    <div className="flex flex-col items-center justify-center text-center gap-8 lg:gap-12">
+      {/* Logo */}
+      <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex-shrink-0 bg-white rounded-full shadow-2xl flex items-center justify-center p-3 border-4 border-gray-100">
+        <img 
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot_20260527-180356_Instagram-kpjUGpMUKxQXJXBih01VTqrZF1LmMg.jpg"
+          alt="Conexion Digital Logo"
+          className="w-full h-full object-contain rounded-full"
+        />
+      </div>
+      
+      {/* Content */}
+      <div className="text-center flex-1">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-800 text-balance">
+          Conectamos expertos con quienes los necesitan
+        </h2>
+        <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto text-pretty">
+          Somos una cooperativa de servicios tecnicos que garantiza calidad, precios justos y atencion rapida en toda la ciudad.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+          <a
+            href="#buscar"
+            className="inline-flex items-center justify-center gap-2 bg-lime-500 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-lime-400 transition-all shadow-lg shadow-lime-500/30 text-base sm:text-lg"
+          >
+            <Search className="w-5 h-5" />
+            Buscar especialista
+          </a>
+          <a
+            href="#nosotros"
+            className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all border border-gray-200 text-base sm:text-lg"
+          >
+            Conocer mas
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
         {/* Services Section */}
         <section id="servicios" className="py-16 sm:py-20 px-4 bg-white">
           <div className="max-w-7xl mx-auto">
