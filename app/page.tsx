@@ -276,78 +276,78 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 via-gray-50 to-white">
       {/* Fixed Navbar */}
 {/* Fixed Navbar */}
-      <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center h-16 md:h-20">
-            {/* Left section - Logo (same width as right section) */}
-            <div className="w-1/3 flex justify-start">
-              <a href="#" className="flex items-center flex-shrink-0">
-                <div className="relative w-full h-12 sm:w-full sm:h-16 md:w-full md:h-20 mt-2">
-                  <img 
-                    src="logoconexiondigitalhorizontal.png"
-                    alt="Conexion Digital Logo"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </a>
-            </div>
-
-            {/* Center section - Navigation */}
-            <nav className="hidden md:flex items-center justify-center gap-1 lg:gap-2 w-1/3">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="px-3 lg:px-4 py-2 text-sm font-medium text-gray-600 hover:text-lime-600 hover:bg-lime-50 rounded-lg transition-colors whitespace-nowrap"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-
-            {/* Right section - Empty spacer (same width as logo) */}
-            <div className="w-1/3 flex justify-end">
-              {/* Mobile Menu Button - visible only on mobile */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-gray-600 hover:text-lime-600 hover:bg-gray-100 rounded-lg transition-colors"
-                aria-label="Menu"
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-            </div>
-            
+{/* Fixed Navbar */}
+<header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50 shadow-sm">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-between h-16 md:h-20">
+      {/* Left section - Logo */}
+      <div className="flex items-center">
+        <a href="#" className="flex items-center flex-shrink-0">
+          <div className="relative w-32 sm:w-40 md:w-48">
+            <img 
+              src="logoconexiondigitalhorizontal.png"
+              alt="Conexion Digital Logo"
+              className="w-full h-auto object-contain"
+            />
           </div>
+        </a>
+      </div>
 
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <nav className="md:hidden py-4 border-t border-gray-100">
-              <div className="flex flex-col gap-1">
-                {NAV_LINKS.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="px-4 py-3 text-base font-medium text-gray-600 hover:text-lime-600 hover:bg-lime-50 rounded-lg transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <button
-                  onClick={() => {
-                    setShowDebug(!showDebug);
-                    setAssignmentCountsState(getAssignmentCounts());
-                    setMobileMenuOpen(false);
-                  }}
-                  className="px-4 py-3 text-sm text-gray-400 hover:text-gray-600 text-left"
-                >
-                  [Debug Mode]
-                </button>
-              </div>
-            </nav>
-          )}
+      {/* Desktop Navigation - Centered */}
+      <nav className="hidden md:flex items-center justify-center gap-1 lg:gap-2">
+        {NAV_LINKS.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className="px-3 lg:px-4 py-2 text-sm font-medium text-gray-600 hover:text-lime-600 hover:bg-lime-50 rounded-lg transition-colors whitespace-nowrap"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      {/* Right section - Mobile Menu Button */}
+      <div className="flex items-center">
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden p-2 text-gray-600 hover:text-lime-600 hover:bg-gray-100 rounded-lg transition-colors"
+          aria-label="Menu"
+        >
+          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+    </div>
+
+    {/* Mobile Navigation */}
+    {mobileMenuOpen && (
+      <nav className="md:hidden py-4 border-t border-gray-100">
+        <div className="flex flex-col gap-1">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-4 py-3 text-base font-medium text-gray-600 hover:text-lime-600 hover:bg-lime-50 rounded-lg transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+          <button
+            onClick={() => {
+              setShowDebug(!showDebug);
+              setAssignmentCountsState(getAssignmentCounts());
+              setMobileMenuOpen(false);
+            }}
+            className="px-4 py-3 text-sm text-gray-400 hover:text-gray-600 text-left"
+          >
+            [Debug Mode]
+          </button>
         </div>
-      </header>
+      </nav>
+    )}
+  </div>
+</header>
     
       {/* Spacer for fixed header */}
       <div className="h-16 md:h-20" />
