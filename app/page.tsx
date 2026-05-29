@@ -402,16 +402,16 @@ export default function HomePage() {
               </p>
             </div>
             
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {RUBROS.map((r) => (
                 <div 
                   key={r.value} 
-                  className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-lime-50 hover:to-lime-100 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-lime-300 transition-all cursor-pointer"
+                  className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-lime-50 hover:to-lime-100 p-6 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-lime-300 transition-all cursor-pointer"
                 >
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4 shadow-sm group-hover:shadow-md transition-shadow">
-                    <r.icon className="w-5 h-5 sm:w-6 sm:h-6 text-lime-600" />
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm group-hover:shadow-md transition-shadow">
+                    <r.icon className="w-6 h-6 text-lime-600" />
                   </div>
-                  <h4 className="font-semibold text-gray-700 text-xs sm:text-sm leading-tight">{r.label}</h4>
+                  <h4 className="font-semibold text-gray-700 text-base sm:text-lg leading-tight">{r.label}</h4>
                 </div>
               ))}
             </div>
