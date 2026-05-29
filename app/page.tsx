@@ -387,33 +387,34 @@ export default function HomePage() {
   </div>
 </section>
         {/* Services Section */}
-        <section id="servicios" className="py-16 sm:py-20 px-4 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-10 sm:mb-14">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
-                Nuestros Servicios
-              </h3>
-              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-                Ofrecemos una amplia variedad de servicios tecnicos para el hogar y empresas, 
-                con profesionales certificados y garantia de calidad.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {RUBROS.map((r) => (
-                <div 
-                  key={r.value} 
-                  className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-lime-50 hover:to-lime-100 p-6 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-lime-300 transition-all cursor-pointer"
-                >
-                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm group-hover:shadow-md transition-shadow">
-                    <r.icon className="w-6 h-6 text-lime-600" />
-                  </div>
-                  <h4 className="font-semibold text-gray-700 text-base sm:text-lg leading-tight">{r.label}</h4>
-                </div>
-              ))}
-            </div>
+{/* Services Section */}
+<section id="servicios" className="py-16 sm:py-20 px-4 bg-white">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-10 sm:mb-14">
+      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
+        Nuestros Servicios
+      </h3>
+      <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+        Ofrecemos una amplia variedad de servicios tecnicos para el hogar y empresas, 
+        con profesionales certificados y garantia de calidad.
+      </p>
+    </div>
+    
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      {RUBROS.map((r) => (
+        <div 
+          key={r.value} 
+          className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-lime-50 hover:to-lime-100 p-6 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-lime-300 transition-all cursor-pointer flex flex-col items-center text-center"
+        >
+          <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm group-hover:shadow-md transition-shadow">
+            <r.icon className="w-8 h-8 text-lime-600" />
           </div>
-        </section>
+          <h4 className="font-semibold text-gray-700 text-base sm:text-lg leading-tight">{r.label}</h4>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
         {/* Search Section */}
         <section id="buscar" className="py-16 sm:py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
