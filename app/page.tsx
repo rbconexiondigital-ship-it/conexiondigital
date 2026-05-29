@@ -406,11 +406,11 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="flex flex-col items-center justify-center text-center gap-8 lg:gap-12">
               {/* Logo */}
-              <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex-shrink-0 bg-white shadow-2xl flex items-center justify-center p-3 border-4 border-gray-100 rounded-full">
+              <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex items-center justify-center p-3">
                 <img 
                   src="service_home.png"
                   alt="Conexion Digital Logo"
-                  className="w-full h-full object-contain rounded-full"
+                  className="w-full h-full object-contain"
                 />
               </div>
               
