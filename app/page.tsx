@@ -274,7 +274,7 @@ export default function HomePage() {
                     {link.label}
                   </a>
                 ))}
-                <button
+                {/* <button
                   onClick={() => {
                     setShowDebug(!showDebug);
                     setAssignmentCountsState(getAssignmentCounts());
@@ -283,7 +283,7 @@ export default function HomePage() {
                   className="px-4 py-3 text-sm text-gray-400 hover:text-gray-600 text-left"
                 >
                   [Debug Mode]
-                </button>
+                </button> */}
               </div>
             </nav>
           )}
@@ -351,7 +351,7 @@ export default function HomePage() {
   <div className="max-w-7xl mx-auto relative z-10">
     <div className="flex flex-col items-center justify-center text-center gap-8 lg:gap-12">
       {/* Logo */}
-      <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex-shrink-0 bg-white rounded-full shadow-2xl flex items-center justify-center p-3 border-4 border-gray-100">
+      <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex-shrink-0 bg-white shadow-2xl flex items-center justify-center p-3 border-4 border-gray-100">
         <img 
           src="service_home.jpg"
           alt="Conexion Digital Logo"
