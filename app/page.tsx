@@ -407,8 +407,7 @@ export default function HomePage() {
             key={r.value} 
             className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-lime-50 hover:to-lime-100 p-6 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-lime-300 transition-all cursor-pointer flex flex-col items-center text-center"
           >
-            <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm group-hover:shadow-md transition-shadow">
-              <IconComponent 
+            <div className="w-16 h-16 bg-transparent rounded-xl flex items-center justify-center mb-4 shadow-sm group-hover:shadow-md transition-shadow">        <IconComponent 
                 className="w-8 h-8 text-lime-600" 
                 strokeWidth={1.5} 
                 fill="none"
