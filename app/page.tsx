@@ -356,7 +356,7 @@ export default function HomePage() {
                   alt="Conexion Digital Logo"
                   className="w-full h-full object-contain rounded-full"
                 /> */}
-                <img src="/service_home.jpg" alt="Conexion Digital Logo"
+                <img src="service_home.jpg" alt="Conexion Digital Logo"
                   className="w-full h-full object-contain rounded-full"
                  />
               </div>
