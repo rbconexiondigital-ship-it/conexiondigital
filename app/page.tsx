@@ -330,16 +330,6 @@ export default function HomePage() {
                     {link.label}
                   </a>
                 ))}
-                {/* <button
-                  onClick={() => {
-                    setShowDebug(!showDebug);
-                    setAssignmentCountsState(getAssignmentCounts());
-                    setMobileMenuOpen(false);
-                  }}
-                  className="px-4 py-3 text-sm text-gray-400 hover:text-gray-600 text-left"
-                >
-                  [Debug Mode]
-                </button> */}
               </div>
             </nav>
           )}
@@ -376,46 +366,22 @@ export default function HomePage() {
       )}
 
       <main className="flex-1">
-        {/* Hero Section */}
-        <section id="inicio" className="relative py-16 sm:py-20 lg:py-28 px-4 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-10 right-0 sm:right-10 w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 opacity-10">
-              <svg viewBox="0 0 200 200" className="w-full h-full">
-                <path
-                  d="M150 30 Q180 60, 140 100 Q100 140, 50 130"
-                  fill="none"
-                  stroke="#84cc16"
-                  strokeWidth="20"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-            <div className="absolute bottom-0 left-0 w-32 sm:w-48 h-32 sm:h-48 opacity-5">
-              <svg viewBox="0 0 200 200" className="w-full h-full">
-                <path
-                  d="M50 170 Q20 140, 60 100 Q100 60, 150 70"
-                  fill="none"
-                  stroke="#84cc16"
-                  strokeWidth="20"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-          </div>
-          
+        {/* Hero Section - Altura ajustada al contenido */}
+        <section id="inicio" className="relative px-4 overflow-hidden">
+          {/* Contenedor flex que da altura exacta desde header hasta el texto */}
           <div className="max-w-7xl mx-auto relative z-10">
-            <div className="flex flex-col items-center justify-center text-center gap-8 lg:gap-12">
-              {/* Logo */}
-              <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex items-center justify-center p-3">
+            <div className="flex flex-col items-center justify-center text-center gap-8 lg:gap-12 min-h-[calc(100vh-80px)]">
+              {/* Imagen isométrica - con altura y ancho controlados */}
+              <div className="w-full max-w-md mx-auto">
                 <img 
                   src="service_home.png"
-                  alt="Conexion Digital Logo"
-                  className="w-full h-full object-contain"
+                  alt="Conexion Digital Isometric"
+                  className="w-full h-auto object-contain"
                 />
               </div>
               
-              {/* Content */}
-              <div className="text-center flex-1">
+              {/* Contenido textual - su ancho define el ancho de la imagen */}
+              <div className="text-center flex-1 w-full">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-800 text-balance">
                   Conectamos expertos con quienes los necesitan
                 </h2>
