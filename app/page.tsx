@@ -194,7 +194,7 @@ export default function HomePage() {
       <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo */}
+            {/* Logo - Left */}
             <a href="#inicio" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
               <div className="relative w-10 h-10 sm:w-12 sm:h-12">
                 <svg viewBox="0 0 100 100" className="w-full h-full">
@@ -224,8 +224,8 @@ export default function HomePage() {
               </div>
             </a>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+            {/* Desktop Navigation - Centered */}
+            <nav className="hidden md:flex items-center justify-center gap-1 lg:gap-2 flex-1 mx-8">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
@@ -235,16 +235,20 @@ export default function HomePage() {
                   {link.label}
                 </a>
               ))}
+            </nav>
+
+            {/* Debug Button - Right */}
+            <div className="flex-shrink-0">
               <button
                 onClick={() => {
                   setShowDebug(!showDebug);
                   setAssignmentCountsState(getAssignmentCounts());
                 }}
-                className="ml-2 text-xs text-gray-400 hover:text-gray-600 px-2 py-1 rounded transition-colors"
+                className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1 rounded transition-colors hidden md:block"
               >
                 [Debug]
               </button>
-            </nav>
+            </div>
 
             {/* Mobile Menu Button */}
             <button
