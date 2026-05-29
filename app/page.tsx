@@ -353,7 +353,7 @@ export default function HomePage() {
       {/* Logo */}
       <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 flex-shrink-0 bg-white rounded-full shadow-2xl flex items-center justify-center p-3 border-4 border-gray-100">
         <img 
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot_20260527-180356_Instagram-kpjUGpMUKxQXJXBih01VTqrZF1LmMg.jpg"
+          src="service_home.jpg"
           alt="Conexion Digital Logo"
           className="w-full h-full object-contain rounded-full"
         />
