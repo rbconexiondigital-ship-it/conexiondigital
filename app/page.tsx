@@ -852,7 +852,7 @@ export default function HomePage() {
             {/* Logo & Description */}
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <div className="relative w-10 h-10">
+                <div className="relative w-25 h-25">
                   <img src="logoconexiondigital.png"/>
                 </div>
                 {/* <div>
