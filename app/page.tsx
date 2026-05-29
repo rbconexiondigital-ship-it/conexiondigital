@@ -282,7 +282,7 @@ export default function HomePage() {
             {/* Left section - Logo (same width as right section) */}
             <div className="w-1/3 flex justify-start">
               <a href="#" className="flex items-center flex-shrink-0">
-                <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20">
+                <div className="relative w-full h-12 sm:w-full sm:h-16 md:w-full md:h-20 mt-2">
                   <img 
                     src="logoconexiondigitalhorizontal.png"
                     alt="Conexion Digital Logo"
