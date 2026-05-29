@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { 
   Phone, 
   Search, 
@@ -102,6 +103,57 @@ const NAV_LINKS = [
   { href: "#contacto", label: "Contacto" },
 ];
 
+const PARTNERS = [
+  {
+    id: 1,
+    name: "Tech Solutions",
+    logo: "https://placehold.co/200x100/84cc16/ffffff?text=Tech+Solutions",
+    alt: "Tech Solutions logo"
+  },
+  {
+    id: 2,
+    name: "Constructora Moderna",
+    logo: "https://placehold.co/200x100/84cc16/ffffff?text=Constructora+Moderna",
+    alt: "Constructora Moderna logo"
+  },
+  {
+    id: 3,
+    name: "Servicios Premium",
+    logo: "https://placehold.co/200x100/84cc16/ffffff?text=Servicios+Premium",
+    alt: "Servicios Premium logo"
+  },
+  {
+    id: 4,
+    name: "Hogar Seguro",
+    logo: "https://placehold.co/200x100/84cc16/ffffff?text=Hogar+Seguro",
+    alt: "Hogar Seguro logo"
+  },
+  {
+    id: 5,
+    name: "Energía Verde",
+    logo: "https://placehold.co/200x100/84cc16/ffffff?text=Energía+Verde",
+    alt: "Energía Verde logo"
+  },
+  {
+    id: 6,
+    name: "Construcciones ABC",
+    logo: "https://placehold.co/200x100/84cc16/ffffff?text=Construcciones+ABC",
+    alt: "Construcciones ABC logo"
+  },
+  {
+    id: 7,
+    name: "Hogar Digital",
+    logo: "https://placehold.co/200x100/84cc16/ffffff?text=Hogar+Digital",
+    alt: "Hogar Digital logo"
+  },
+  {
+    id: 8,
+    name: "Servicios Eficientes",
+    logo: "https://placehold.co/200x100/84cc16/ffffff?text=Servicios+Eficientes",
+    alt: "Servicios Eficientes logo"
+  }
+];
+
 // Helper to get/set assignment counts from localStorage
 function getAssignmentCounts(): Record<number, number> {
   if (typeof window === "undefined") return {};
@@ -124,6 +176,40 @@ export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showDebug, setShowDebug] = useState(false);
   const [assignmentCounts, setAssignmentCountsState] = useState<Record<number, number>>({});
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [slidesToShow, setSlidesToShow] = useState(4);
+
+   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setSlidesToShow(1);
+      } else if (window.innerWidth < 768) {
+        setSlidesToShow(2);
+      } else if (window.innerWidth < 1024) {
+        setSlidesToShow(3);
+      } else {
+        setSlidesToShow(4);
+      }
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => 
+      prev + slidesToShow >= PARTNERS.length ? 0 : prev + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => 
+      prev === 0 ? Math.max(0, PARTNERS.length - slidesToShow) : prev - 1
+    );
+  };
+
+  const visiblePartners = PARTNERS.slice(currentSlide, currentSlide + slidesToShow);
 
   const buscarEspecialista = () => {
     if (!rubro || !zona) return;
@@ -745,6 +831,48 @@ export default function HomePage() {
             </div> */}
           </div>
         </section>
+        {/* Partners Carousel Section */}
+      <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10 sm:mb-14">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
+              Nuestros Partners
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+              Empresas y organizaciones que confían en nosotros
+            </p>
+          </div>
+
+          <div className="relative px-12">
+            {/* Carousel Container */}
+            <div className="overflow-hidden">
+              <div 
+                className="flex gap-6 transition-transform duration-300 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * (100 / slidesToShow)}%)` }}
+              >
+                {PARTNERS.map((partner) => (
+                  <div
+                    key={partner.id}
+                    className="flex-shrink-0"
+                    style={{ width: `${100 / slidesToShow}%` }}
+                  >
+                    <div className="bg-white rounded-xl sm:rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-lime-300 group">
+                      <div className="h-24 flex items-center justify-center">
+                        <img
+                          src={partner.logo}
+                          alt={partner.alt}
+                          className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                        />
+                      </div>
+                      <p className="text-center text-gray-600 text-sm mt-4 font-medium group-hover:text-lime-600 transition-colors">
+                        {partner.name}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
       </main>
 
       {/* Footer */}
