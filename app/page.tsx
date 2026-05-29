@@ -629,7 +629,7 @@ export default function HomePage() {
             {/* Values */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               <div className="bg-white p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
                   <Users className="w-6 h-6 text-lime-600" />
                 </div>
                 <h4 className="font-semibold mb-2 text-gray-800 text-lg">Trabajo cooperativo</h4>
@@ -638,7 +638,7 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="bg-white p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
                   <Star className="w-6 h-6 text-gray-600" />
                 </div>
                 <h4 className="font-semibold mb-2 text-gray-800 text-lg">Calidad garantizada</h4>
@@ -647,7 +647,7 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="bg-white p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
                   <Clock className="w-6 h-6 text-lime-600" />
                 </div>
                 <h4 className="font-semibold mb-2 text-gray-800 text-lg">Respuesta rapida</h4>
@@ -656,7 +656,7 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="bg-white p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
                   <Heart className="w-6 h-6 text-gray-600" />
                 </div>
                 <h4 className="font-semibold mb-2 text-gray-800 text-lg">Compromiso social</h4>
@@ -854,7 +854,7 @@ export default function HomePage() {
             {/* Logo & Description */}
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <div className="relative w-25 h-25">
+                <div className="relative w-25 h-25 bg-white">
                   <img src="logoconexiondigital.png"/>
                 </div>
                 {/* <div>
