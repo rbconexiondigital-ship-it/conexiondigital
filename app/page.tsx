@@ -279,15 +279,20 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo - Left */}
-            <a href="#" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12">
-                <img 
-                  src="logoconexiondigital.png"
-                  alt="Conexion Digital Logo"
-                  className="w-full h-full object-contain rounded-full"
-                />
-              </div>
-            </a>
+              {/* Logo - Left */}
+              <a href="#" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20">
+                  <img 
+                    src="logoconexiondigital.png"
+                    alt="Conexion Digital Logo"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                {/* Opcional: agregar texto del logo */}
+                <span className="hidden sm:inline-block font-bold text-gray-800 text-lg md:text-xl">
+                  <span className="text-lime-500">Conexion</span> Digital
+                </span>
+              </a>
 
             {/* Desktop Navigation - Centered */}
             <nav className="hidden md:flex items-center justify-center gap-1 lg:gap-2 flex-1 mx-8">
