@@ -322,7 +322,7 @@ export default function HomePage() {
             </nav>
 
             {/* Debug Button - Right */}
-            {/* <div className="flex-shrink-0">
+            <div className="flex-shrink-0">
               <button
                 onClick={() => {
                   setShowDebug(!showDebug);
@@ -332,7 +332,7 @@ export default function HomePage() {
               >
                 [Debug]
               </button>
-            </div> */}
+            </div>
 
             {/* Mobile Menu Button */}
             <button
