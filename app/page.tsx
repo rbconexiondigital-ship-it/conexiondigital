@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { 
   Phone, 
@@ -21,7 +21,10 @@ import {
   Star,
   Building,
   Target,
-  Heart
+  Heart,
+  Moon,
+  Sun,
+  Globe
 } from "lucide-react";
 
 // Types
@@ -36,20 +39,20 @@ interface Especialista {
 
 // Data
 const RUBROS = [
-  { value: "electricidad", label: "Electricidad domiciliaria", icon: Zap },
-  { value: "plomeria", label: "Plomeria", icon: Droplets },
-  { value: "gasista", label: "Gasista matriculado", icon: Flame },
-  { value: "aires", label: "Aires acondicionados", icon: Wind },
-  { value: "herreria", label: "Herreria", icon: Shield },
-  { value: "cerrajeria", label: "Cerrajeria", icon: Wrench },
+  { value: "electricidad", label: { es: "Electricidad domiciliaria", en: "Home Electricity" } },
+  { value: "plomeria", label: { es: "Plomeria", en: "Plumbing" } },
+  { value: "gasista", label: { es: "Gasista matriculado", en: "Licensed Gas Technician" } },
+  { value: "aires", label: { es: "Aires acondicionados", en: "Air Conditioning" } },
+  { value: "herreria", label: { es: "Herreria", en: "Metalwork" } },
+  { value: "cerrajeria", label: { es: "Cerrajeria", en: "Locksmith" } },
 ];
 
 const ZONAS = [
-  { value: "norte", label: "Zona Norte" },
-  { value: "sur", label: "Zona Sur" },
-  { value: "centro", label: "Centro" },
-  { value: "oeste", label: "Zona Oeste" },
-  { value: "este", label: "Zona Este" },
+  { value: "norte", label: { es: "Zona Norte", en: "North Zone" } },
+  { value: "sur", label: { es: "Zona Sur", en: "South Zone" } },
+  { value: "centro", label: { es: "Centro", en: "Downtown" } },
+  { value: "oeste", label: { es: "Zona Oeste", en: "West Zone" } },
+  { value: "este", label: { es: "Zona Este", en: "East Zone" } },
 ];
 
 const ESPECIALISTAS: Especialista[] = [
@@ -96,11 +99,11 @@ const ESPECIALISTAS: Especialista[] = [
 ];
 
 const NAV_LINKS = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#buscar", label: "Buscar" },
-  { href: "#nosotros", label: "Nosotros" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "#inicio", label: { es: "Inicio", en: "Home" } },
+  { href: "#servicios", label: { es: "Servicios", en: "Services" } },
+  { href: "#buscar", label: { es: "Buscar", en: "Search" } },
+  { href: "#nosotros", label: { es: "Nosotros", en: "About" } },
+  { href: "#contacto", label: { es: "Contacto", en: "Contact" } },
 ];
 
 const PARTNERS = [
@@ -154,6 +157,205 @@ const PARTNERS = [
   }
 ];
 
+// Translations
+const translations = {
+  es: {
+    // General
+    "search_expert": "Buscar especialista",
+    "learn_more": "Conocer más",
+    "clear": "Limpiar",
+    "searching": "Buscando...",
+    "assigned_expert": "Especialista asignado",
+    "contact_whatsapp": "Contactar por WhatsApp",
+    "no_results": "No encontramos especialistas",
+    "no_results_desc": "No hay especialistas disponibles para el rubro y zona seleccionados. Intenta con otra combinación o contáctanos directamente.",
+    
+    // Hero
+    "hero_title": "Conectamos expertos con quienes los necesitan",
+    "hero_desc": "Somos una cooperativa de servicios técnicos que garantiza calidad, precios justos y atención rápida en toda la ciudad.",
+    
+    // Services
+    "services_title": "Nuestros Servicios",
+    "services_desc": "Ofrecemos una amplia variedad de servicios técnicos para el hogar y empresas, con profesionales certificados y garantía de calidad.",
+    
+    // Search
+    "search_title": "Encuentra tu especialista",
+    "search_desc": "Selecciona el tipo de servicio y tu zona para encontrar al profesional ideal.",
+    "service_type": "Tipo de servicio",
+    "coverage_zone": "Zona de cobertura",
+    "select_rubro": "Seleccionar rubro...",
+    "select_zona": "Seleccionar zona...",
+    
+    // About
+    "about_title": "Sobre Nosotros",
+    "about_desc": "Somos una cooperativa de trabajo comprometida con brindar servicios de calidad y generar oportunidades laborales justas para nuestros asociados.",
+    "services_done": "Servicios realizados",
+    "active_experts": "Especialistas activos",
+    "coverage_zones": "Zonas de cobertura",
+    "satisfied_clients": "Clientes satisfechos",
+    "cooperative_work": "Trabajo cooperativo",
+    "cooperative_work_desc": "Distribución justa del trabajo entre todos los asociados de la cooperativa.",
+    "guaranteed_quality": "Calidad garantizada",
+    "guaranteed_quality_desc": "Técnicos certificados y con amplia experiencia en cada especialidad.",
+    "quick_response": "Respuesta rápida",
+    "quick_response_desc": "Atención inmediata y coordinación eficiente para resolver tu problema.",
+    "social_commitment": "Compromiso social",
+    "social_commitment_desc": "Precios justos y transparentes para toda la comunidad.",
+    "mission_title": "Nuestra Misión",
+    "mission_desc": "Brindar servicios técnicos de excelencia, generando trabajo digno para nuestros asociados y contribuyendo al desarrollo de la comunidad a través de la economía social y solidaria.",
+    "vision_title": "Nuestra Visión",
+    "vision_desc": "Ser la cooperativa de servicios técnicos de referencia en la región, reconocida por la calidad de nuestro trabajo, la innovación tecnológica y nuestro compromiso con los valores cooperativos.",
+    
+    // Contact
+    "contact_title": "Contacto",
+    "contact_desc": "Estamos aquí para ayudarte. Contáctanos por cualquiera de estos medios.",
+    "whatsapp": "WhatsApp",
+    "immediate_response": "Respuesta inmediata",
+    "email": "Email",
+    "general_inquiries": "Consultas generales",
+    
+    // Partners
+    "partners_title": "Nuestros Partners",
+    "partners_desc": "Empresas y organizaciones que confían en nosotros",
+    
+    // Footer
+    "quick_links": "Enlaces rápidos",
+    "services": "Servicios",
+    "contact": "Contacto",
+    "rights": "Todos los derechos reservados.",
+    
+    // Floating button
+    "chat_with_us": "¡Chatea con nosotros!",
+  },
+  en: {
+    // General
+    "search_expert": "Search expert",
+    "learn_more": "Learn more",
+    "clear": "Clear",
+    "searching": "Searching...",
+    "assigned_expert": "Assigned expert",
+    "contact_whatsapp": "Contact via WhatsApp",
+    "no_results": "No experts found",
+    "no_results_desc": "No experts available for the selected service and zone. Try another combination or contact us directly.",
+    
+    // Hero
+    "hero_title": "Connecting experts with those who need them",
+    "hero_desc": "We are a technical services cooperative that guarantees quality, fair prices, and fast service throughout the city.",
+    
+    // Services
+    "services_title": "Our Services",
+    "services_desc": "We offer a wide variety of technical services for homes and businesses, with certified professionals and quality guarantee.",
+    
+    // Search
+    "search_title": "Find your expert",
+    "search_desc": "Select the type of service and your zone to find the ideal professional.",
+    "service_type": "Service type",
+    "coverage_zone": "Coverage zone",
+    "select_rubro": "Select service...",
+    "select_zona": "Select zone...",
+    
+    // About
+    "about_title": "About Us",
+    "about_desc": "We are a work cooperative committed to providing quality services and creating fair job opportunities for our associates.",
+    "services_done": "Services completed",
+    "active_experts": "Active experts",
+    "coverage_zones": "Coverage zones",
+    "satisfied_clients": "Satisfied clients",
+    "cooperative_work": "Cooperative work",
+    "cooperative_work_desc": "Fair distribution of work among all cooperative associates.",
+    "guaranteed_quality": "Guaranteed quality",
+    "guaranteed_quality_desc": "Certified technicians with extensive experience in each specialty.",
+    "quick_response": "Quick response",
+    "quick_response_desc": "Immediate attention and efficient coordination to solve your problem.",
+    "social_commitment": "Social commitment",
+    "social_commitment_desc": "Fair and transparent prices for the entire community.",
+    "mission_title": "Our Mission",
+    "mission_desc": "Provide excellent technical services, generating dignified work for our associates and contributing to community development through social and solidarity economy.",
+    "vision_title": "Our Vision",
+    "vision_desc": "To be the reference technical services cooperative in the region, recognized for the quality of our work, technological innovation, and commitment to cooperative values.",
+    
+    // Contact
+    "contact_title": "Contact",
+    "contact_desc": "We're here to help you. Contact us through any of these means.",
+    "whatsapp": "WhatsApp",
+    "immediate_response": "Immediate response",
+    "email": "Email",
+    "general_inquiries": "General inquiries",
+    
+    // Partners
+    "partners_title": "Our Partners",
+    "partners_desc": "Companies and organizations that trust us",
+    
+    // Footer
+    "quick_links": "Quick links",
+    "services": "Services",
+    "contact": "Contact",
+    "rights": "All rights reserved.",
+    
+    // Floating button
+    "chat_with_us": "Chat with us!",
+  }
+};
+
+// Context for theme and language
+type Theme = 'light' | 'dark';
+type Language = 'es' | 'en';
+
+interface AppContextType {
+  theme: Theme;
+  toggleTheme: () => void;
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+}
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
+
+export const useApp = () => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error('useApp must be used within AppProvider');
+  }
+  return context;
+};
+
+function AppProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<Theme>('light');
+  const [language, setLanguage] = useState<Language>('es');
+
+  useEffect(() => {
+    // Load theme from localStorage
+    const savedTheme = localStorage.getItem('theme') as Theme;
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    }
+
+    // Load language from localStorage
+    const savedLanguage = localStorage.getItem('language') as Language;
+    if (savedLanguage) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
+
+  const t = (key: string): string => {
+    return translations[language][key as keyof typeof translations.es] || key;
+  };
+
+  return (
+    <AppContext.Provider value={{ theme, toggleTheme, language, setLanguage, t }}>
+      {children}
+    </AppContext.Provider>
+  );
+}
+
 // Helper to get/set assignment counts from localStorage
 function getAssignmentCounts(): Record<number, number> {
   if (typeof window === "undefined") return {};
@@ -168,6 +370,7 @@ function setAssignmentCount(id: number, count: number) {
 }
 
 export default function HomePage() {
+  const { theme, toggleTheme, language, setLanguage, t } = useApp();
   const [rubro, setRubro] = useState("");
   const [zona, setZona] = useState("");
   const [resultado, setResultado] = useState<Especialista | null>(null);
@@ -256,8 +459,8 @@ export default function HomePage() {
   };
 
   const generarWhatsAppLink = (especialista: Especialista) => {
-    const rubroLabel = RUBROS.find((r) => r.value === rubro)?.label || rubro;
-    const zonaLabel = ZONAS.find((z) => z.value === zona)?.label || zona;
+    const rubroLabel = RUBROS.find((r) => r.value === rubro)?.label[language] || rubro;
+    const zonaLabel = ZONAS.find((z) => z.value === zona)?.label[language] || zona;
     const mensaje = encodeURIComponent(
       `Hola ${especialista.nombre}, te contacto desde Conexion Digital. Necesito un servicio de ${rubroLabel} en ${zonaLabel}.`
     );
@@ -265,17 +468,29 @@ export default function HomePage() {
   };
 
   const getRubroLabels = (rubros: string[]) => {
-    return rubros.map((r) => RUBROS.find((rb) => rb.value === r)?.label || r);
+    return rubros.map((r) => RUBROS.find((rb) => rb.value === r)?.label[language] || r);
   };
 
   const getZonaLabels = (zonas: string[]) => {
-    return zonas.map((z) => ZONAS.find((zn) => zn.value === z)?.label || z);
+    return zonas.map((z) => ZONAS.find((zn) => zn.value === z)?.label[language] || z);
+  };
+
+  const getRubroLabel = (value: string) => {
+    return RUBROS.find((r) => r.value === value)?.label[language] || value;
+  };
+
+  const getZonaLabel = (value: string) => {
+    return ZONAS.find((z) => z.value === value)?.label[language] || value;
+  };
+
+  const getNavLabel = (href: string) => {
+    return NAV_LINKS.find((l) => l.href === href)?.label[language] || href;
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 via-gray-50 to-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
       {/* Fixed Navbar */}
-      <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50 shadow-sm">
+      <header className="fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo - Left */}
@@ -285,30 +500,50 @@ export default function HomePage() {
                   <img 
                     src="logoconexiondigitalhorizontal.png"
                     alt="Conexion Digital Logo"
-                    className="w-full h-auto object-contain"
+                    className="w-full h-auto object-contain dark:brightness-90"
                   />
                 </div>
               </a>
             </div>
 
-            {/* Desktop Navigation - Centered (only visible on desktop) */}
+            {/* Desktop Navigation - Centered */}
             <nav className="hidden md:flex items-center justify-center gap-1 lg:gap-2 absolute left-1/2 transform -translate-x-1/2">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-3 lg:px-4 py-2 text-sm font-medium text-gray-600 hover:text-lime-600 hover:bg-lime-50 rounded-lg transition-colors whitespace-nowrap"
+                  className="px-3 lg:px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-lime-600 dark:hover:text-lime-400 hover:bg-lime-50 dark:hover:bg-lime-950/50 rounded-lg transition-colors whitespace-nowrap"
                 >
-                  {link.label}
+                  {getNavLabel(link.href)}
                 </a>
               ))}
             </nav>
 
-            {/* Right section - Mobile Menu Button */}
-            <div className="flex items-center">
+            {/* Right section - Theme Toggle, Language Switcher, Mobile Menu */}
+            <div className="flex items-center gap-2">
+              {/* Language Switcher */}
+              <button
+                onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
+                className="p-2 text-gray-600 dark:text-gray-300 hover:text-lime-600 dark:hover:text-lime-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                aria-label="Toggle language"
+              >
+                <Globe className="w-5 h-5" />
+                <span className="sr-only">Language</span>
+              </button>
+
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 text-gray-600 dark:text-gray-300 hover:text-lime-600 dark:hover:text-lime-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+              </button>
+
+              {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-gray-600 hover:text-lime-600 hover:bg-gray-100 rounded-lg transition-colors"
+                className="md:hidden p-2 text-gray-600 dark:text-gray-300 hover:text-lime-600 dark:hover:text-lime-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                 aria-label="Menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -318,16 +553,16 @@ export default function HomePage() {
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <nav className="md:hidden py-4 border-t border-gray-100">
+            <nav className="md:hidden py-4 border-t border-gray-100 dark:border-gray-800">
               <div className="flex flex-col gap-1">
                 {NAV_LINKS.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="px-4 py-3 text-base font-medium text-gray-600 hover:text-lime-600 hover:bg-lime-50 rounded-lg transition-colors"
+                    className="px-4 py-3 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-lime-600 dark:hover:text-lime-400 hover:bg-lime-50 dark:hover:bg-lime-950/50 rounded-lg transition-colors"
                   >
-                    {link.label}
+                    {getNavLabel(link.href)}
                   </a>
                 ))}
               </div>
@@ -341,7 +576,7 @@ export default function HomePage() {
 
       {/* Debug Panel */}
       {showDebug && (
-        <div className="bg-gray-900 text-lime-400 p-4 font-mono text-sm">
+        <div className="bg-gray-900 dark:bg-black text-lime-400 p-4 font-mono text-sm">
           <div className="max-w-7xl mx-auto px-4">
             <p className="mb-2 text-white">Contadores de asignaciones:</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
@@ -366,41 +601,38 @@ export default function HomePage() {
       )}
 
       <main className="flex-1">
-        {/* Hero Section - Altura ajustada al contenido */}
+        {/* Hero Section */}
         <section id="inicio" className="relative px-4 overflow-hidden">
-          {/* Contenedor flex que da altura exacta desde header hasta el texto */}
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="flex flex-col items-center justify-center text-center gap-8 lg:gap-12 min-h-[calc(100vh-80px)]">
-              {/* Imagen isométrica - con altura y ancho controlados */}
               <div className="w-full max-w-md mx-auto">
                 <img 
                   src="service_home.png"
                   alt="Conexion Digital Isometric"
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain dark:brightness-95"
                 />
               </div>
               
-              {/* Contenido textual - su ancho define el ancho de la imagen */}
               <div className="text-center flex-1 w-full">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-800 text-balance">
-                  Conectamos expertos con quienes los necesitan
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-800 dark:text-gray-100 text-balance">
+                  {t("hero_title")}
                 </h2>
-                <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto text-pretty">
-                  Somos una cooperativa de servicios tecnicos que garantiza calidad, precios justos y atencion rapida en toda la ciudad.
+                <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto text-pretty">
+                  {t("hero_desc")}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                   <a
                     href="#buscar"
-                    className="inline-flex items-center justify-center gap-2 bg-lime-500 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-lime-400 transition-all shadow-lg shadow-lime-500/30 text-base sm:text-lg"
+                    className="inline-flex items-center justify-center gap-2 bg-lime-500 dark:bg-lime-600 text-gray-900 dark:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-lime-400 dark:hover:bg-lime-500 transition-all shadow-lg shadow-lime-500/30 text-base sm:text-lg"
                   >
                     <Search className="w-5 h-5" />
-                    Buscar especialista
+                    {t("search_expert")}
                   </a>
                   <a
                     href="#nosotros"
-                    className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all border border-gray-200 text-base sm:text-lg"
+                    className="inline-flex items-center justify-center gap-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-all border border-gray-200 dark:border-gray-700 text-base sm:text-lg"
                   >
-                    Conocer mas
+                    {t("learn_more")}
                   </a>
                 </div>
               </div>
@@ -409,15 +641,14 @@ export default function HomePage() {
         </section>
 
         {/* Services Section */}
-        <section id="servicios" className="py-16 sm:py-20 px-4 bg-white">
+        <section id="servicios" className="py-16 sm:py-20 px-4 bg-white dark:bg-gray-900 transition-colors duration-300">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 sm:mb-14">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
-                Nuestros Servicios
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-3 sm:mb-4">
+                {t("services_title")}
               </h3>
-              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-                Ofrecemos una amplia variedad de servicios tecnicos para el hogar y empresas, 
-                con profesionales certificados y garantia de calidad.
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+                {t("services_desc")}
               </p>
             </div>
             
@@ -427,17 +658,17 @@ export default function HomePage() {
                 return (
                   <div 
                     key={r.value} 
-                    className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-lime-50 hover:to-lime-100 p-6 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-lime-300 transition-all cursor-pointer flex flex-col items-center text-center"
+                    className="group bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-800/50 hover:from-lime-50 hover:to-lime-100 dark:hover:from-lime-950/50 dark:hover:to-lime-950/30 p-6 rounded-xl sm:rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-lime-300 dark:hover:border-lime-800 transition-all cursor-pointer flex flex-col items-center text-center"
                   >
                     <div className="w-20 h-20 rounded-xl flex items-center justify-center mb-4 group-hover:shadow-md transition-shadow">
                       <IconComponent 
-                        className="w-12 h-12 text-lime-600" 
+                        className="w-12 h-12 text-lime-600 dark:text-lime-500" 
                         strokeWidth={1.5} 
                         fill="none"
                         stroke="currentColor"
                       />
                     </div>
-                    <h4 className="font-semibold text-gray-700 text-base sm:text-lg leading-tight">{r.label}</h4>
+                    <h4 className="font-semibold text-gray-700 dark:text-gray-300 text-base sm:text-lg leading-tight">{r.label[language]}</h4>
                   </div>
                 );
               })}
@@ -446,33 +677,33 @@ export default function HomePage() {
         </section>
 
         {/* Search Section */}
-        <section id="buscar" className="py-16 sm:py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+        <section id="buscar" className="py-16 sm:py-20 px-4 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 transition-colors duration-300">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-8 sm:mb-10">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
-                Encuentra tu especialista
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-3 sm:mb-4">
+                {t("search_title")}
               </h3>
-              <p className="text-gray-600 text-sm sm:text-base">
-                Selecciona el tipo de servicio y tu zona para encontrar al profesional ideal.
+              <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                {t("search_desc")}
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-5 sm:p-8 lg:p-10 border border-gray-200">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl shadow-xl p-5 sm:p-8 lg:p-10 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
               <div className="space-y-4 sm:space-y-6">
                 {/* Rubro Select */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Tipo de servicio
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {t("service_type")}
                   </label>
                   <select
                     value={rubro}
                     onChange={(e) => setRubro(e.target.value)}
-                    className="w-full px-4 py-3 sm:py-4 rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-base"
+                    className="w-full px-4 py-3 sm:py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-base"
                   >
-                    <option value="">Seleccionar rubro...</option>
+                    <option value="">{t("select_rubro")}</option>
                     {RUBROS.map((r) => (
                       <option key={r.value} value={r.value}>
-                        {r.label}
+                        {r.label[language]}
                       </option>
                     ))}
                   </select>
@@ -480,18 +711,18 @@ export default function HomePage() {
 
                 {/* Zona Select */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Zona de cobertura
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {t("coverage_zone")}
                   </label>
                   <select
                     value={zona}
                     onChange={(e) => setZona(e.target.value)}
-                    className="w-full px-4 py-3 sm:py-4 rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-base"
+                    className="w-full px-4 py-3 sm:py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-base"
                   >
-                    <option value="">Seleccionar zona...</option>
+                    <option value="">{t("select_zona")}</option>
                     {ZONAS.map((z) => (
                       <option key={z.value} value={z.value}>
-                        {z.label}
+                        {z.label[language]}
                       </option>
                     ))}
                   </select>
@@ -502,56 +733,56 @@ export default function HomePage() {
                   <button
                     onClick={buscarEspecialista}
                     disabled={!rubro || !zona || buscando}
-                    className="flex-1 bg-lime-500 text-gray-900 py-3 sm:py-4 px-6 rounded-xl font-semibold hover:bg-lime-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg shadow-lime-500/25 text-base"
+                    className="flex-1 bg-lime-500 dark:bg-lime-600 text-gray-900 dark:text-white py-3 sm:py-4 px-6 rounded-xl font-semibold hover:bg-lime-400 dark:hover:bg-lime-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg shadow-lime-500/25 text-base"
                   >
                     {buscando ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-gray-800/30 border-t-gray-800 rounded-full animate-spin" />
-                        Buscando...
+                        <div className="w-5 h-5 border-2 border-gray-800/30 dark:border-white/30 border-t-gray-800 dark:border-t-white rounded-full animate-spin" />
+                        {t("searching")}
                       </>
                     ) : (
                       <>
                         <Search className="w-5 h-5" />
-                        Buscar especialista
+                        {t("search_expert")}
                       </>
                     )}
                   </button>
                   <button
                     onClick={limpiarBusqueda}
-                    className="px-6 py-3 sm:py-4 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-50 transition-all font-medium"
+                    className="px-6 py-3 sm:py-4 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium"
                   >
-                    Limpiar
+                    {t("clear")}
                   </button>
                 </div>
               </div>
 
               {/* Results */}
               {resultado && (
-                <div className="mt-8 pt-8 border-t border-gray-200">
+                <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center gap-2 mb-4">
                     <CheckCircle className="w-5 h-5 text-lime-500" />
-                    <h4 className="text-sm font-medium text-gray-700">
-                      Especialista asignado
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      {t("assigned_expert")}
                     </h4>
                   </div>
-                  <div className="bg-gradient-to-br from-lime-50 to-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-lime-200">
+                  <div className="bg-gradient-to-br from-lime-50 to-gray-50 dark:from-lime-950/30 dark:to-gray-800/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-lime-200 dark:border-lime-800">
                     <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
                       <img
                         src={resultado.foto}
                         alt={resultado.nombre}
-                        className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white shadow-lg flex-shrink-0"
+                        className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-lg flex-shrink-0"
                       />
                       <div className="flex-1 text-center sm:text-left">
-                        <h5 className="text-xl sm:text-2xl font-semibold text-gray-800">
+                        <h5 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-100">
                           {resultado.nombre}
                         </h5>
                         <div className="mt-2 space-y-1">
-                          <p className="text-sm text-gray-600 flex items-center justify-center sm:justify-start gap-2">
-                            <Wrench className="w-4 h-4 text-lime-600" />
+                          <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center sm:justify-start gap-2">
+                            <Wrench className="w-4 h-4 text-lime-600 dark:text-lime-500" />
                             {getRubroLabels(resultado.rubros).join(", ")}
                           </p>
-                          <p className="text-sm text-gray-600 flex items-center justify-center sm:justify-start gap-2">
-                            <MapPin className="w-4 h-4 text-lime-600" />
+                          <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center sm:justify-start gap-2">
+                            <MapPin className="w-4 h-4 text-lime-600 dark:text-lime-500" />
                             {getZonaLabels(resultado.zonas).join(", ")}
                           </p>
                         </div>
@@ -562,7 +793,7 @@ export default function HomePage() {
                           className="mt-4 inline-flex items-center gap-2 bg-green-500 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl font-medium hover:bg-green-600 transition-colors shadow-lg shadow-green-500/25"
                         >
                           <Phone className="w-4 h-4" />
-                          Contactar por WhatsApp
+                          {t("contact_whatsapp")}
                         </a>
                       </div>
                     </div>
@@ -572,17 +803,16 @@ export default function HomePage() {
 
               {/* No Results */}
               {sinResultados && (
-                <div className="mt-8 pt-8 border-t border-gray-200">
+                <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
                   <div className="text-center py-8">
-                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Search className="w-8 h-8 text-gray-400" />
+                    <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Search className="w-8 h-8 text-gray-400 dark:text-gray-600" />
                     </div>
-                    <h4 className="text-lg font-medium text-gray-700 mb-2">
-                      No encontramos especialistas
+                    <h4 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      {t("no_results")}
                     </h4>
-                    <p className="text-gray-500 text-sm max-w-md mx-auto">
-                      No hay especialistas disponibles para el rubro y zona seleccionados. 
-                      Intenta con otra combinacion o contactanos directamente.
+                    <p className="text-gray-500 dark:text-gray-400 text-sm max-w-md mx-auto">
+                      {t("no_results_desc")}
                     </p>
                   </div>
                 </div>
@@ -592,74 +822,73 @@ export default function HomePage() {
         </section>
 
         {/* About Section */}
-        <section id="nosotros" className="py-16 sm:py-20 px-4 bg-white">
+        <section id="nosotros" className="py-16 sm:py-20 px-4 bg-white dark:bg-gray-900 transition-colors duration-300">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 sm:mb-14">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
-                Sobre Nosotros
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-3 sm:mb-4">
+                {t("about_title")}
               </h3>
-              <p className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
-                Somos una cooperativa de trabajo comprometida con brindar servicios de calidad 
-                y generar oportunidades laborales justas para nuestros asociados.
+              <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto text-sm sm:text-base">
+                {t("about_desc")}
               </p>
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
-              <div className="bg-gradient-to-br from-lime-50 to-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-lime-200 text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-lime-600 mb-1">+500</p>
-                <p className="text-gray-600 text-xs sm:text-sm">Servicios realizados</p>
+              <div className="bg-gradient-to-br from-lime-50 to-white dark:from-lime-950/30 dark:to-gray-800 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-lime-200 dark:border-lime-800 text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-lime-600 dark:text-lime-500 mb-1">+500</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">{t("services_done")}</p>
               </div>
-              <div className="bg-gradient-to-br from-gray-50 to-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-gray-700 mb-1">+50</p>
-                <p className="text-gray-600 text-xs sm:text-sm">Especialistas activos</p>
+              <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800/50 dark:to-gray-800 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 dark:border-gray-700 text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-gray-700 dark:text-gray-300 mb-1">+50</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">{t("active_experts")}</p>
               </div>
-              <div className="bg-gradient-to-br from-lime-50 to-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-lime-200 text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-lime-600 mb-1">5</p>
-                <p className="text-gray-600 text-xs sm:text-sm">Zonas de cobertura</p>
+              <div className="bg-gradient-to-br from-lime-50 to-white dark:from-lime-950/30 dark:to-gray-800 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-lime-200 dark:border-lime-800 text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-lime-600 dark:text-lime-500 mb-1">5</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">{t("coverage_zones")}</p>
               </div>
-              <div className="bg-gradient-to-br from-gray-50 to-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-gray-700 mb-1">98%</p>
-                <p className="text-gray-600 text-xs sm:text-sm">Clientes satisfechos</p>
+              <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800/50 dark:to-gray-800 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 dark:border-gray-700 text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-gray-700 dark:text-gray-300 mb-1">98%</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">{t("satisfied_clients")}</p>
               </div>
             </div>
             
             {/* Values */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              <div className="bg-white p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mb-4">
-                  <Users className="w-6 h-6 text-lime-600" />
+              <div className="bg-white dark:bg-gray-800 p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-shadow">
+                <div className="w-12 h-12 bg-lime-100 dark:bg-lime-950 rounded-xl flex items-center justify-center mb-4">
+                  <Users className="w-6 h-6 text-lime-600 dark:text-lime-500" />
                 </div>
-                <h4 className="font-semibold mb-2 text-gray-800 text-lg">Trabajo cooperativo</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Distribucion justa del trabajo entre todos los asociados de la cooperativa.
+                <h4 className="font-semibold mb-2 text-gray-800 dark:text-gray-100 text-lg">{t("cooperative_work")}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {t("cooperative_work_desc")}
                 </p>
               </div>
-              <div className="bg-white p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
-                  <Star className="w-6 h-6 text-gray-600" />
+              <div className="bg-white dark:bg-gray-800 p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-shadow">
+                <div className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-xl flex items-center justify-center mb-4">
+                  <Star className="w-6 h-6 text-gray-600 dark:text-gray-400" />
                 </div>
-                <h4 className="font-semibold mb-2 text-gray-800 text-lg">Calidad garantizada</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Tecnicos certificados y con amplia experiencia en cada especialidad.
+                <h4 className="font-semibold mb-2 text-gray-800 dark:text-gray-100 text-lg">{t("guaranteed_quality")}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {t("guaranteed_quality_desc")}
                 </p>
               </div>
-              <div className="bg-white p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mb-4">
-                  <Clock className="w-6 h-6 text-lime-600" />
+              <div className="bg-white dark:bg-gray-800 p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-shadow">
+                <div className="w-12 h-12 bg-lime-100 dark:bg-lime-950 rounded-xl flex items-center justify-center mb-4">
+                  <Clock className="w-6 h-6 text-lime-600 dark:text-lime-500" />
                 </div>
-                <h4 className="font-semibold mb-2 text-gray-800 text-lg">Respuesta rapida</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Atencion inmediata y coordinacion eficiente para resolver tu problema.
+                <h4 className="font-semibold mb-2 text-gray-800 dark:text-gray-100 text-lg">{t("quick_response")}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {t("quick_response_desc")}
                 </p>
               </div>
-              <div className="bg-white p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
-                  <Heart className="w-6 h-6 text-gray-600" />
+              <div className="bg-white dark:bg-gray-800 p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-shadow">
+                <div className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-xl flex items-center justify-center mb-4">
+                  <Heart className="w-6 h-6 text-gray-600 dark:text-gray-400" />
                 </div>
-                <h4 className="font-semibold mb-2 text-gray-800 text-lg">Compromiso social</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Precios justos y transparentes para toda la comunidad.
+                <h4 className="font-semibold mb-2 text-gray-800 dark:text-gray-100 text-lg">{t("social_commitment")}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {t("social_commitment_desc")}
                 </p>
               </div>
             </div>
@@ -669,21 +898,19 @@ export default function HomePage() {
               <div className="bg-gradient-to-br from-lime-500 to-lime-600 p-6 sm:p-8 rounded-2xl text-white">
                 <div className="flex items-center gap-3 mb-4">
                   <Target className="w-8 h-8" />
-                  <h4 className="text-xl sm:text-2xl font-bold">Nuestra Mision</h4>
+                  <h4 className="text-xl sm:text-2xl font-bold">{t("mission_title")}</h4>
                 </div>
                 <p className="text-lime-100 leading-relaxed">
-                  Brindar servicios tecnicos de excelencia, generando trabajo digno para nuestros 
-                  asociados y contribuyendo al desarrollo de la comunidad a traves de la economia social y solidaria.
+                  {t("mission_desc")}
                 </p>
               </div>
-              <div className="bg-gradient-to-br from-gray-700 to-gray-800 p-6 sm:p-8 rounded-2xl text-white">
+              <div className="bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-800 dark:to-gray-900 p-6 sm:p-8 rounded-2xl text-white">
                 <div className="flex items-center gap-3 mb-4">
                   <Building className="w-8 h-8" />
-                  <h4 className="text-xl sm:text-2xl font-bold">Nuestra Vision</h4>
+                  <h4 className="text-xl sm:text-2xl font-bold">{t("vision_title")}</h4>
                 </div>
-                <p className="text-gray-300 leading-relaxed">
-                  Ser la cooperativa de servicios tecnicos de referencia en la region, reconocida por 
-                  la calidad de nuestro trabajo, la innovacion tecnologica y nuestro compromiso con los valores cooperativos.
+                <p className="text-gray-300 dark:text-gray-400 leading-relaxed">
+                  {t("vision_desc")}
                 </p>
               </div>
             </div>
@@ -691,43 +918,43 @@ export default function HomePage() {
         </section>
 
         {/* Contact Section */}
-        <section id="contacto" className="py-16 sm:py-20 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
+        <section id="contacto" className="py-16 sm:py-20 px-4 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 transition-colors duration-300">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 sm:mb-14">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
-                Contacto
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-3 sm:mb-4">
+                {t("contact_title")}
               </h3>
-              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-                Estamos aqui para ayudarte. Contactanos por cualquiera de estos medios.
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+                {t("contact_desc")}
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
-              <div className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
-                <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Phone className="w-7 h-7 text-green-600" />
+              <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 text-center hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 bg-green-100 dark:bg-green-950 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Phone className="w-7 h-7 text-green-600 dark:text-green-500" />
                 </div>
-                <h4 className="font-semibold text-gray-800 mb-2 text-lg">WhatsApp</h4>
-                <p className="text-gray-600 text-sm mb-4">Respuesta inmediata</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-2 text-lg">{t("whatsapp")}</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{t("immediate_response")}</p>
                 <a 
                   href="https://wa.me/5491112345678" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-green-600 font-medium hover:text-green-700"
+                  className="inline-flex items-center gap-2 text-green-600 dark:text-green-500 font-medium hover:text-green-700 dark:hover:text-green-400"
                 >
                   +54 9 11 1234-5678
                 </a>
               </div>
               
-              <div className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
-                <div className="w-14 h-14 bg-lime-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Mail className="w-7 h-7 text-lime-600" />
+              <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 text-center hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 bg-lime-100 dark:bg-lime-950 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Mail className="w-7 h-7 text-lime-600 dark:text-lime-500" />
                 </div>
-                <h4 className="font-semibold text-gray-800 mb-2 text-lg">Email</h4>
-                <p className="text-gray-600 text-sm mb-4">Consultas generales</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-2 text-lg">{t("email")}</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{t("general_inquiries")}</p>
                 <a 
                   href="mailto:contacto@conexiondigital.coop"
-                  className="inline-flex items-center gap-2 text-lime-600 font-medium hover:text-lime-700 break-all"
+                  className="inline-flex items-center gap-2 text-lime-600 dark:text-lime-500 font-medium hover:text-lime-700 dark:hover:text-lime-400 break-all"
                 >
                   contacto@conexiondigital.coop
                 </a>
@@ -737,14 +964,14 @@ export default function HomePage() {
         </section>
 
         {/* Partners Carousel Section */}
-        <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-white to-gray-50">
+        <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 sm:mb-14">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
-                Nuestros Partners
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-3 sm:mb-4">
+                {t("partners_title")}
               </h3>
-              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-                Empresas y organizaciones que confían en nosotros
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+                {t("partners_desc")}
               </p>
             </div>
 
@@ -752,18 +979,18 @@ export default function HomePage() {
               {/* Navigation Buttons */}
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg border border-gray-200 hover:bg-lime-50 hover:border-lime-300 transition-all z-10"
+                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg border border-gray-200 dark:border-gray-700 hover:bg-lime-50 dark:hover:bg-lime-950/50 hover:border-lime-300 dark:hover:border-lime-800 transition-all z-10"
                 aria-label="Previous partners"
               >
-                <ChevronLeft className="w-6 h-6 text-gray-600 hover:text-lime-600" />
+                <ChevronLeft className="w-6 h-6 text-gray-600 dark:text-gray-400 hover:text-lime-600 dark:hover:text-lime-500" />
               </button>
               
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg border border-gray-200 hover:bg-lime-50 hover:border-lime-300 transition-all z-10"
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg border border-gray-200 dark:border-gray-700 hover:bg-lime-50 dark:hover:bg-lime-950/50 hover:border-lime-300 dark:hover:border-lime-800 transition-all z-10"
                 aria-label="Next partners"
               >
-                <ChevronRight className="w-6 h-6 text-gray-600 hover:text-lime-600" />
+                <ChevronRight className="w-6 h-6 text-gray-600 dark:text-gray-400 hover:text-lime-600 dark:hover:text-lime-500" />
               </button>
 
               {/* Carousel Container */}
@@ -778,15 +1005,15 @@ export default function HomePage() {
                       className="flex-shrink-0"
                       style={{ width: `calc(${100 / slidesToShow}% - ${(slidesToShow - 1) * 24 / slidesToShow}px)` }}
                     >
-                      <div className="bg-white rounded-xl sm:rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-lime-300 group">
+                      <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:border-lime-300 dark:hover:border-lime-800 group">
                         <div className="h-24 flex items-center justify-center">
                           <img
                             src={partner.logo}
                             alt={partner.alt}
-                            className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                            className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 dark:brightness-90 dark:hover:brightness-100"
                           />
                         </div>
-                        <p className="text-center text-gray-600 text-sm mt-4 font-medium group-hover:text-lime-600 transition-colors">
+                        <p className="text-center text-gray-600 dark:text-gray-400 text-sm mt-4 font-medium group-hover:text-lime-600 dark:group-hover:text-lime-500 transition-colors">
                           {partner.name}
                         </p>
                       </div>
@@ -803,8 +1030,8 @@ export default function HomePage() {
                     onClick={() => setCurrentSlide(idx * slidesToShow)}
                     className={`h-2 rounded-full transition-all duration-300 ${
                       Math.floor(currentSlide / slidesToShow) === idx
-                        ? "w-8 bg-lime-500"
-                        : "w-2 bg-gray-300 hover:bg-gray-400"
+                        ? "w-8 bg-lime-500 dark:bg-lime-600"
+                        : "w-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600"
                     }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
@@ -839,14 +1066,14 @@ export default function HomePage() {
             </svg>
           </div>
           {/* Tooltip text */}
-          <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
-            ¡Chatea con nosotros!
+          <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-800 dark:bg-gray-700 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+            {t("chat_with_us")}
           </span>
         </div>
       </a>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-10 sm:py-14 px-4">
+      <footer className="bg-gray-900 dark:bg-black text-white py-10 sm:py-14 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 sm:mb-12">
             {/* Logo & Description */}
@@ -864,27 +1091,25 @@ export default function HomePage() {
                   </svg>
                 </div>
                 <div>
-                  <span className="text-lg font-bold">
-                    <span className="text-gray-400">c</span>
-                    <span className="text-lime-500 font-black">O</span>
-                    <span className="text-gray-400">nexion</span>
-                  </span>
-                  <span className="text-sm text-gray-500 italic ml-1">digital</span>
+                  <img src="logoconexiondigital.png" 
+                     alt="Conexion Digital Logo"
+                    className="w-full h-auto object-contain brightness-90"
+                  />
                 </div>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed">
-                Cooperativa de servicios tecnicos comprometida con la calidad y el trabajo justo.
+                {t("about_desc")}
               </p>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h5 className="font-semibold mb-4 text-white">Enlaces rapidos</h5>
+              <h5 className="font-semibold mb-4 text-white">{t("quick_links")}</h5>
               <ul className="space-y-2">
                 {NAV_LINKS.map((link) => (
                   <li key={link.href}>
                     <a href={link.href} className="text-gray-400 hover:text-lime-500 transition-colors text-sm">
-                      {link.label}
+                      {getNavLabel(link.href)}
                     </a>
                   </li>
                 ))}
@@ -893,11 +1118,11 @@ export default function HomePage() {
 
             {/* Services */}
             <div>
-              <h5 className="font-semibold mb-4 text-white">Servicios</h5>
+              <h5 className="font-semibold mb-4 text-white">{t("services")}</h5>
               <ul className="space-y-2">
                 {RUBROS.slice(0, 4).map((r) => (
                   <li key={r.value}>
-                    <span className="text-gray-400 text-sm">{r.label}</span>
+                    <span className="text-gray-400 text-sm">{r.label[language]}</span>
                   </li>
                 ))}
               </ul>
@@ -905,7 +1130,7 @@ export default function HomePage() {
 
             {/* Contact */}
             <div>
-              <h5 className="font-semibold mb-4 text-white">Contacto</h5>
+              <h5 className="font-semibold mb-4 text-white">{t("contact")}</h5>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-lime-500" />
@@ -926,11 +1151,20 @@ export default function HomePage() {
           {/* Bottom */}
           <div className="pt-8 border-t border-gray-800 text-center">
             <p className="text-gray-500 text-sm">
-              © 2025 Conexion Digital - Cooperativa de Servicios. Todos los derechos reservados.
+              © 2026 Conexion Digital - Cooperativa de Servicios. {t("rights")}
             </p>
           </div>
         </div>
       </footer>
     </div>
+  );
+}
+
+// Wrap the app with providers
+export function AppWrapper() {
+  return (
+    <AppProvider>
+      <HomePage />
+    </AppProvider>
   );
 }
