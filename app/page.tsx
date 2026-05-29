@@ -855,14 +855,14 @@ export default function HomePage() {
                 <div className="relative w-10 h-10">
                   <img src="logoconexiondigital.png"/>
                 </div>
-                <div>
+                {/* <div>
                   <span className="text-lg font-bold">
                     <span className="text-gray-400">c</span>
                     <span className="text-lime-500 font-black">O</span>
                     <span className="text-gray-400">nexion</span>
                   </span>
                   <span className="text-sm text-gray-500 italic ml-1">digital</span>
-                </div>
+                </div> */}
               </div>
               <p className="text-gray-400 text-sm leading-relaxed">
                 Cooperativa de servicios tecnicos comprometida con la calidad y el trabajo justo.
@@ -918,7 +918,7 @@ export default function HomePage() {
           {/* Bottom */}
           <div className="pt-8 border-t border-gray-800 text-center">
             <p className="text-gray-500 text-sm">
-              © 2025 Conexion Digital - Cooperativa de Servicios. Todos los derechos reservados.
+              © 2026 Conexion Digital - Cooperativa de Servicios. Todos los derechos reservados.
             </p>
           </div>
         </div>
