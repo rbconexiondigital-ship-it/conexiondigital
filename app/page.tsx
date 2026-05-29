@@ -703,7 +703,7 @@ export default function HomePage() {
                 </a>
               </div>
               
-              <div className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow sm:col-span-2 lg:col-span-1">
+              {/* <div className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow sm:col-span-2 lg:col-span-1">
                 <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <MapPin className="w-7 h-7 text-gray-600" />
                 </div>
@@ -712,7 +712,7 @@ export default function HomePage() {
                 <p className="text-gray-700 font-medium">
                   Av. Corrientes 1234, CABA
                 </p>
-              </div>
+              </div> */}
             </div>
 
             {/* Hours */}
