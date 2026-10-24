@@ -37,13 +37,55 @@ interface Especialista {
 
 // Data
 const RUBROS = [
-  { value: "electricidad", label: "Electricidad domiciliaria", icon: Zap },
-  { value: "plomeria", label: "Plomeria", icon: Droplets },
-  { value: "gasista", label: "Gasista matriculado", icon: Flame },
-  { value: "aires", label: "Aires acondicionados", icon: Wind },
-  { value: "herreria", label: "Herreria", icon: Shield },
-  { value: "cerrajeria", label: "Cerrajeria", icon: Wrench },
-  { value: "software", label: "Software", icon: CodeXml },
+  { 
+    value: "electricidad", 
+    label: "Electricidad domiciliaria", 
+    icon: Zap,
+    description: "Instalaciones eléctricas completas, reparación de cortocircuitos, tableros eléctricos, luminarias, tomacorrientes y certificaciones. Trabajamos con materiales de primera calidad y cumplimos con todas las normas de seguridad vigentes.",
+    features: ["Instalaciones nuevas", "Reparaciones urgentes", "Tableros y protecciones", "Certificación de instalaciones"]
+  },
+  { 
+    value: "plomeria", 
+    label: "Plomeria", 
+    icon: Droplets,
+    description: "Servicios integrales de plomería: detección y reparación de pérdidas, instalación de cañerías, grifería, sanitarios, termotanques y bombas de agua. Atención de emergencias las 24 horas.",
+    features: ["Detección de pérdidas", "Instalación de cañerías", "Cambio de grifería", "Termotanques y bombas"]
+  },
+  { 
+    value: "gasista", 
+    label: "Gasista matriculado", 
+    icon: Flame,
+    description: "Instalaciones de gas natural y envasado con gasista matriculado. Pruebas de hermeticidad, habilitaciones, reparación de artefactos y mantenimiento preventivo. Cumplimos con toda la normativa de Enargas.",
+    features: ["Instalaciones nuevas", "Pruebas de hermeticidad", "Habilitaciones", "Reparación de artefactos"]
+  },
+  { 
+    value: "aires", 
+    label: "Aires acondicionados", 
+    icon: Wind,
+    description: "Instalación, mantenimiento y reparación de aires acondicionados split, multisplit y centrales. Carga de gas, limpieza profunda de equipos y asesoramiento en eficiencia energética.",
+    features: ["Instalación de equipos", "Mantenimiento preventivo", "Carga de gas", "Limpieza profunda"]
+  },
+  { 
+    value: "herreria", 
+    label: "Herreria", 
+    icon: Shield,
+    description: "Trabajos de herrería en general: rejas, portones, barandas, escaleras, estructuras metálicas y soldadura. Diseño a medida y fabricación con materiales de calidad.",
+    features: ["Rejas y portones", "Barandas y escaleras", "Estructuras metálicas", "Soldadura especializada"]
+  },
+  { 
+    value: "cerrajeria", 
+    label: "Cerrajeria", 
+    icon: Wrench,
+    description: "Apertura de puertas, cambio de cerraduras, instalación de cerraduras de seguridad, copias de llaves y servicios de urgencia. Trabajamos con las mejores marcas del mercado.",
+    features: ["Apertura de puertas", "Cambio de cerraduras", "Cerraduras de seguridad", "Servicio de urgencia"]
+  },
+  { 
+    value: "software", 
+    label: "Software", 
+    icon: CodeXml,
+    description: "Desarrollo de software a medida, aplicaciones web y móviles, sistemas de gestión, automatizaciones y soporte técnico informático. Soluciones digitales para tu hogar o empresa.",
+    features: ["Desarrollo a medida", "Apps web y móviles", "Sistemas de gestión", "Soporte técnico"]
+  },
 ];
 
 const ZONAS = [
@@ -180,6 +222,7 @@ export default function HomePage() {
   const [assignmentCounts, setAssignmentCountsState] = useState<Record<number, number>>({});
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(4);
+  const [selectedService, setSelectedService] = useState<typeof RUBROS[0] | null>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -198,6 +241,24 @@ export default function HomePage() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+  if (selectedService) {
+    // Lock body scroll
+    document.body.style.overflow = 'hidden';
+    
+    // Close on ESC
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedService(null);
+    };
+    window.addEventListener('keydown', handleEsc);
+    
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }
+}, [selectedService]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => 
@@ -424,28 +485,114 @@ export default function HomePage() {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {RUBROS.map((r) => {
-                const IconComponent = r.icon;
-                return (
-                  <div 
-                    key={r.value} 
-                    className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-lime-50 hover:to-lime-100 p-6 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-lime-300 transition-all cursor-pointer flex flex-col items-center text-center"
-                  >
-                    <div className="w-20 h-20 rounded-xl flex items-center justify-center mb-4">
-                      <IconComponent 
-                        className="w-12 h-12 text-lime-600" 
-                        strokeWidth={1.5} 
-                        fill="none"
-                        stroke="currentColor"
-                      />
-                    </div>
-                    <h4 className="font-semibold text-gray-700 text-base sm:text-lg leading-tight">{r.label}</h4>
-                  </div>
-                );
-              })}
-            </div>
+  {RUBROS.map((r) => {
+    const IconComponent = r.icon;
+    return (
+      <button
+        key={r.value}
+        onClick={() => setSelectedService(r)}
+        className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-lime-50 hover:to-lime-100 p-6 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-lime-300 transition-all cursor-pointer flex flex-col items-center text-center focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
+      >
+        <div className="w-20 h-20 rounded-xl flex items-center justify-center mb-4">
+          <IconComponent 
+            className="w-12 h-12 text-lime-600" 
+            strokeWidth={1.5} 
+            fill="none"
+            stroke="currentColor"
+          />
+        </div>
+        <h4 className="font-semibold text-gray-700 text-base sm:text-lg leading-tight">{r.label}</h4>
+        <span className="mt-3 text-xs text-lime-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+          Ver más →
+        </span>
+      </button>
+    );
+  })}
+</div>
           </div>
         </section>
+
+        {/* Service Detail Modal */}
+{selectedService && (
+  <div 
+    className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
+    onClick={() => setSelectedService(null)}
+  >
+    <div 
+      className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Header */}
+      <div className="relative p-6 sm:p-8 pb-4">
+        <button
+          onClick={() => setSelectedService(null)}
+          className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+          aria-label="Cerrar"
+        >
+          <X className="w-5 h-5" />
+        </button>
+        
+        <div className="flex flex-col items-center text-center">
+          <div className="w-20 h-20 bg-lime-100 rounded-2xl flex items-center justify-center mb-4">
+            <selectedService.icon 
+              className="w-12 h-12 text-lime-600" 
+              strokeWidth={1.5}
+              fill="none"
+              stroke="currentColor"
+            />
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-800">
+            {selectedService.label}
+          </h3>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="px-6 sm:px-8 pb-6 sm:pb-8">
+        <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-6">
+          {selectedService.description}
+        </p>
+
+        {/* Features */}
+        <div className="mb-6">
+          <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3">
+            ¿Qué incluye?
+          </h4>
+          <ul className="space-y-2">
+            {selectedService.features.map((feature, idx) => (
+              <li key={idx} className="flex items-start gap-3 text-sm text-gray-600">
+                <CheckCircle className="w-5 h-5 text-lime-500 flex-shrink-0 mt-0.5" />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button
+            onClick={() => {
+              setRubro(selectedService.value);
+              setSelectedService(null);
+              // Smooth scroll to search section
+              document.getElementById('buscar')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="flex-1 bg-lime-500 text-gray-900 py-3 px-6 rounded-xl font-semibold hover:bg-lime-400 transition-all flex items-center justify-center gap-2 shadow-lg shadow-lime-500/25"
+          >
+            <Search className="w-5 h-5" />
+            Buscar especialista
+          </button>
+          <button
+            onClick={() => setSelectedService(null)}
+            className="px-6 py-3 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-50 transition-all font-medium"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
         {/* Search Section */}
         <section id="buscar" className="py-16 sm:py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
